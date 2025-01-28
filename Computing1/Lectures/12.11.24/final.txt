@@ -1,0 +1,13 @@
+The biggest problem on the final is that people assume what is happening rather than rereading the question
+
+Finals Study Guide
+    - 40 Questions
+        - 40% are HW Packet 1-5 questions, all are 1 pt
+        - Exam 1 and Exam 2 content
+        - Structures
+        - Dynamic memory allocation, (on the heap or on the stack)
+            - malloc and free
+        - Expression Evaluation / Memory Diagram
+        - Definitions
+        - Return value of scanf / fscanf : noc / EOF 
+        - Program / Function with strings(c-string, char array)
