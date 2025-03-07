@@ -1,0 +1,57 @@
+Node *list_sum(Node *head1, Node *head2)
+{
+    // 2 Node* to track the original Node
+    // 1 Node* to output the "summed" number
+    Node *num1 = head1;
+    Node *num2 = head2;
+    Node *head_sum = NULL;
+
+    // im not sure if doing it this way is right but im lost rn
+    Node *temp1 = head1->next->next;
+    Node *temp2 = head2->next;
+    
+
+    int carry = 0;
+
+    num1 = reverse_list(&num1);
+    num2 = reverse_list(&num2);
+
+    while (num1 || num2)
+    {
+        // sum becomes the value of carry
+        int sum = carry;
+
+        // protect num1 & num2 so we dont access data we dont have
+        if (num1 != NULL)
+        {
+
+            sum += num1->value;
+            num1 = num1->next;
+        }
+        if (num2 != NULL)
+        {
+            sum += num2->value;
+            num2 = num2->next;
+        }
+
+        // carry over becomes sum / 10 to remove what ever place we are in to move on
+        carry = sum / 10;
+
+        // sum is modded to "remove" the extra place value ie: 18 -> 8 then insert it
+        sum %= 10;
+
+        // insert value at head of node
+        head_insert(&head_sum, sum);
+    }
+
+    // accounting for if carry still has a value
+    if (carry > 0)
+    {
+        head_insert(&head_sum, carry);
+    }
+
+    num1 = reverse_list(&temp1);
+    num2 = reverse_list(&temp2);
+    
+    return head_sum;
+}
