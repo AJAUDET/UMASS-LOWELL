@@ -1,7 +1,0 @@
-
-    Queues
-
-        insert
-        service
-        empty
-        front
