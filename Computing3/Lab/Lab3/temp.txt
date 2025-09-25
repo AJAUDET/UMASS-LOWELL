@@ -1,0 +1,178 @@
+/*
+    1 dram = 1.7718451953125 grams
+    1 dram = 1/256 Avoirdupois pound2
+    1 dram = 1/96 Troy (apothecaries) pound3
+*/
+
+#include <iostream>
+using namespace std;
+
+class Mass
+{
+private:
+    int avoirdupois;
+    int troy_pounds;
+    int grams;
+
+public:
+    Mass(/* args */);
+    Mass();
+
+    double promptInpupt(int prompt_val);
+    void display();
+    
+    void setMassAvoirdupoisPounds(int avoPounds);
+    void setMassTroyPounds(int troyPounds);
+    void setMassMetricGrams(int metricGrams);
+
+    void convert(int conversion_type, double data);
+
+    int getMassAvoirdupoisPounds(void);
+    int getMassTroyPounds(void);
+    int getMassGrams(void);
+};
+
+Mass::Mass(/* args */)
+{
+}
+
+Mass::Mass()
+{
+    
+}
+
+int main () {
+    Mass obj;
+    bool running = true;
+    int userInput;
+    
+    while (running)
+    {
+        cout << "Please enter 1 to use Avoirdupois pounds, 2 to use troy pounds, 3 to use grams, or 0 to exit: ";
+
+        // Prompt for options
+        cin >> userInput;
+        
+        // Invalid input: re-prompt until valid input
+        while (userInput < 0 || userInput > 3)
+        {
+            // Invalid input
+            cout << "Invalid option, please try again: ";
+            cin >> userInput;
+        }
+        // 0: Terminate program
+        if (userInput == 0)
+        {
+            running = false;
+        }
+        // 1, 2, 3: Convert
+        else
+        {
+            double data = obj.promptInpupt(userInput);
+            obj.convert(userInput, data);
+        }
+    }
+
+    obj.display();
+    
+    return 0;
+}
+
+double Mass::promptInpupt(int prompt_val) {
+    double data;
+    switch (prompt_val)
+    {
+    case 1:
+        cout << "Please enter a mass in Avoirdupois pounds: ";
+        cin >> data;
+        setMassAvoirdupoisPounds(data);
+        break;
+    case 2:
+        cout << "Please enter a mass in Troy pounds: ";
+        cin >> data;
+        break;
+    case 3:
+        cout << "Please enter a mass in Grams: ";
+        cin >> data;
+        break;
+    default:
+        break;
+    }
+}
+
+void Mass::display() {
+    cout << "Mass in Avoirdupois Pounds is: " << getMassAvoirdupoisPounds() << endl;
+    cout << "Mass in Troy Pounds is: " << getMassTroyPounds() << endl;
+    cout << "Mass in Grams is: " << getMassGrams() << endl;
+}
+
+int Mass::getMassAvoirdupoisPounds(void)
+{
+    return avoirdupois;
+}
+
+int Mass::getMassTroyPounds(void)
+{
+    return troy_pounds;
+}
+
+int Mass::getMassGrams(void)
+{
+    return grams;
+}
+
+void Mass::setMassAvoirdupoisPounds(int avoPounds) {
+    avoirdupois = avoPounds;
+}
+
+void Mass::setMassTroyPounds(int troyPounds) {
+    troy_pounds = troyPounds;
+}
+
+void Mass::setMassMetricGrams(int metricGrams) {
+    grams = metricGrams;
+}
+
+
+/*
+    1 = avdpoint lbs -> troy, metric grams
+    2 = troy -> avdpoint, grams
+    3 = grams -> avdpoint, troy
+    0 exit
+
+    1 dram = 1.7718451953125 grams
+    1 dram = 1/256 Avoirdupois pound2
+    1 dram = 1/96 Troy (apothecaries) pound3
+*/
+void Mass::convert(int conversion_type, double data) {
+    double dram, avoirdupois, gram, troy;
+    switch (conversion_type) {
+        case 1:
+            avoirdupois = data;
+            dram = avoirdupois / 256;
+            troy = dram * 96;
+            gram = dram / 1.7718451953125;
+        break;
+
+        case 2:
+            troy = data;
+            dram = troy / 96;
+            avoirdupois = dram * 256;
+            gram = dram / 1.7718451953125;
+        break;
+
+        case 3:
+            gram = data;
+            dram = gram * 1.7718451953125;
+            avoirdupois = dram * 256;
+            troy = dram * 96;
+        break;
+        
+        default:
+        break;
+    }
+
+    setMassAvoirdupoisPounds(avoirdupois);
+    setMassTroyPounds(troy);
+    setMassMetricGrams(gram);
+}

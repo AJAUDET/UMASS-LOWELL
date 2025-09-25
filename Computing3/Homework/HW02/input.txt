@@ -1,0 +1,7 @@
+At first, many newcomers to programming may express a dislike for C++ due to its
+seemingly intricate syntax and steep learning curve. Some even say that one of the things a
+beginner most dislikes is managing memory manually. However, as they delve deeper into the
+language, they discover the beauty of its powerful features and extensive libraries. Gradually,
+what they initially dislike transforms into a profound love for the versatility and efficiency that
+C++ offers. The process of conquering coding challenges and witnessing the elegance of wellcrafted C++ 
+code becomes a source of genuine love and passion for these aspiring programmers.
