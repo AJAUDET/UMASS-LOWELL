@@ -1,0 +1,136 @@
+#include <stdio.h>
+
+int reg0, reg1, reg2, reg3, reg4, reg5, reg6, reg7, reg8, reg9, reg10, reg11;
+int LT, LTE, GT, GTE, EQ, NEQ;
+
+int A[] = {9, 8, 0, 7, 5, 6, 2, 1, 4, 3};
+
+void comp(int a, int b)
+{
+    LT = a < b;
+    LTE = a <= b;
+    GT = a > b;
+    GTE = a >= b;
+    EQ = a == b;
+    NEQ = a != b;
+}
+
+void select_sort(void)
+{
+    reg1 = 0;                   // int i = 0
+    reg2 = 0;                   // int j = 0
+    
+LOOP_START:
+    reg3 = reg0 / 2;            // N / 2
+    comp(reg1, reg3);
+    if (GT) goto LOOP_CONT;
+    reg4 = reg1;                // min = i
+    reg5 = reg1;                // max = i
+
+    reg2 = reg1 + 1;            // j = i + 1
+   
+
+LOOP_NEST:
+    reg3 = reg0 - reg1;         // N - i
+    comp(reg2, reg3);
+    if (GTE) goto LOOP_CONT;    // for(j = i+1; j < n -i; j++)
+    
+    reg6 = A[reg2];             // A[j]
+    reg7 = A[reg5];             // A[max]
+    reg8 = A[reg4];             // A[min]
+
+    comp(reg6, reg7);           // if (A[j] > A[max]) max = j; continue;
+    if (LTE) reg5 = reg2;       // max = j
+
+    comp(reg6, reg8);           // if (A[j] < A[min]) min = j;
+    if(GTE) reg4 = reg2;        // min = j
+    reg2 = reg2 + 1;            // UPDATE j
+    goto LOOP_NEST;             // loop again
+
+
+LOOP_CONT:
+    reg9 = A[reg1];             // tmp = A[i]
+    A[reg1] = A[reg4];          //  A[i] = A[min]
+    A[reg4] = reg9;             // A[min] = tmp
+    
+    reg10 = reg2 - 1;           // N - 1
+    reg11 = reg10 - reg1;       // N - 1 - i
+
+    reg9 = A[reg11];            // tmp = A[N-1-i]
+    A[reg11] = A[reg5];         // A[N-1-i] = A[max]
+    A[reg5] = reg9;             // A[max] = tmp;
+    reg1 = reg1 + 1;            // UPDATE i
+    goto LOOP_START;
+}
+_________________________________________________-----------------------------------------------------------___________________________________________
+
+.data
+    ARR : 0:10                      # array of 10 elemets
+
+.text
+#######################################
+# $a0 <- stores N
+#######################################
+SELECT_SORT:
+    li $t0, 0                       # i = 0
+    li $t1, 0                       # j = 0
+
+OUTER_LOOP:
+    li $t3, $a0                     # N
+    div $t3, $t3, 2                 # N / 2
+    bgt $t0, $t3, OUTER_LOOP_CONT   # if (GT) goto LOOP_CONT
+    
+    li $t4, $t0                     # min = i
+    li $t5, $t0                     # max = i 
+    
+    add $t1, $t0, 1                 # j = i + 1
+
+INNER_LOOP:
+    li $t3, $a0                     # N        
+    sub $t3, $t3, $t0               # N - i
+    bge $t1, $t3, OUTER_LOOP_CONT   # if j < n - i
+    
+    mul $t1, $t1, 4		            # (j*4)
+    mul $t4, $t4, 4	 	            # (min*4)
+    mul $t5, $t5, 4		            # (max*4)
+    
+    li $t6, $t1(ARR)	            # A[j]
+    li $t7, $t4(ARR)		        # A[min]
+    li $t8, $t5(ARR)		        # A[max]
+    
+    ble $t8, $t6, INNER_IF_J_MAX    # if(arr[j] > arr[max])
+    bge $t7, $t6, INNER_IF_J_MIN    # if(arr[j] < arr[min])
+    
+    div $t1, $t1, 4		            # j/4
+    div $t4, $t4, 4		            # min / 4
+    div $t5, $t5, 4		            # max/4
+    add $t1, $t1, 1		            # j++
+INNER_IF_J_MAX:
+    move $t5, $t1	  	            # max = j
+    j INNER_LOOP
+    
+INNER_IF_J_MIN:
+    move $t4, $t1	  	             # min = j
+    j INNER_LOOP
+
+OUTER_LOOP_CONT:
+    li $t3, $a0			            # N
+    mul $t0, $t0, 4		            # (i * 4)
+    mul $t4, $t4, 4		            # min * 4
+    mul $t5, $t5, 4		            # max * 4
+    
+    li $t9, $t0(ARR)		        # tmp = A[i]
+    li $t0(ARR), $t4(ARR)           # a[i] = a[min]
+    li $t4(ARR), $t9		        # a[min] = tmp
+    
+    div $t0, $t0, 4		            # i / 4
+    sub $t3, $t3, 1		            # N - 1
+    sub $t3, $t3, $t0	 	        # N - 1 - i
+    mul $t3, $t3, 4		            # N * 4
+    
+    li $t9, $t3(ARR)	    	    # tmp = a[n-1-i]
+    li $t3(ARR), $t5(ARR)	        # a[n..] = a[max]
+    li $t5(ARR), $t9		        # a[max] = tmp
+    add $t0, $t0, 1		            # i++
+    j OUTER_LOOP
+    

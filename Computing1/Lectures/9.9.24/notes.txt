@@ -1,0 +1,8 @@
+bits: smallest unit of memory a conputer can have, 0/1
+
+8 bits is a byte
+
+1 byte is used to encode characters, the computer is one big block of memory, each block has a memory address
+
+printf : searches for the first character of the statement and subsequent characters to the invisible character called the null terminator \0
+

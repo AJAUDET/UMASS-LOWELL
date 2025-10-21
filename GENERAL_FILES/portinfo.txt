@@ -1,0 +1,12 @@
+
+ip: 192.168.5.101
+ssh port: 2004
+rdp port: 3004
+
+user: user
+pwd: 1qazxsW@1
+
+/home/user/stuff/id_key
+
+ssh -i /home/user/stuff/id_key user@login.comp2300.uml.edu
+

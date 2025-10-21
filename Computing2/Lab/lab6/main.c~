@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "my_string.h"
+
+void test_push_back();
+void test_pop_back();
+void test_at();
+void test_c();
+void test_cat();
+void test_empty();
+
+int main(int argc, char* argv[])
+{
+  printf("Testing Push Back\n");
+  test_push_back();
+  printf("**********\n");
+  
+  printf("Testing Pop Back\n");
+  test_pop_back();
+  printf("**********\n");
+  
+  printf("Testing Str At\n");
+  test_at();
+  printf("**********\n");
+  
+  printf("Testing C Str\n");
+  test_c();
+  printf("**********\n");
+  
+  printf("Testing Concat\n");
+  test_cat();
+  printf("**********\n");
+  
+  printf("Testing Empty\n");
+  test_empty();
+  printf("**********\n");
+  
+  return 0;
+}
+
+void test_push_back()
+{
+	MY_STRING s = my_string_init_default();
+	
+	my_string_push_back(s, 'L');
+	my_string_push_back(s, 'o');
+	my_string_push_back(s, 's');
+	my_string_push_back(s, ' ');
+	my_string_push_back(s, 'l');
+	my_string_push_back(s, 'o');
+	my_string_push_back(s, 's');
+	
+	printf("String post push back: %s\n", my_string_c_str(s));
+	
+	my_string_destroy(&s);
+}
+
+void test_pop_back()
+{
+	MY_STRING s = my_string_init_c_string("HALLO");
+	printf("String before Pop Back: %s\n", my_string_c_str(s));
+	my_string_pop_back(s);
+	printf("String after Pop Back: %s\n", my_string_c_str(s));
+	my_string_destroy(&s);
+}
+
+void test_at()
+{
+	MY_STRING s = my_string_init_c_string("Besonders");
+	printf("Character at index 0: %s\n",my_string_at(s, 0));
+	printf("Character at index 3: %s\n",my_string_at(s, 3));
+	printf("Character at index 1: %s\n",my_string_at(s, 1));
+	my_string_destroy(&s);
+}
+
+void test_c()
+{
+	MY_STRING s = my_string_init_c_string("Etwas");
+	const char* c = my_string_c_str(s);
+	printf("String: %s\n", c);
+	my_string_destroy(&s);
+}
+
+void test_cat()
+{
+	MY_STRING s1 = my_string_init_c_string("Es ist ");
+	MY_STRING s2 = my_string_init_c_string("Volkig");
+	
+	my_string_concat(s1,s2);
+	
+	printf("Concated String: %s\n", my_string_c_str(s1));
+	my_string_destroy(&s1);
+	my_string_destroy(&s2);
+}
+
+void test_empty()
+{
+	MY_STRING s = my_string_init_c_string("Wie geht's");
+	printf("Is string empty: %s\n", (my_string_empty(s) == TRUE) ? "Yes" : "No");
+	while(my_string_get_size(s) > 0)
+	{
+		my_string_pop_back(s);
+	}
+	printf("Is string empty: %s\n", (my_string_empty(s) == TRUE) ? "Yes" : "No");
+	my_string_destroy(&s);
+} 

@@ -1,4 +1,4 @@
-#include <money.cpp>
+#include "money.hpp"
 
 int main(void)
 {

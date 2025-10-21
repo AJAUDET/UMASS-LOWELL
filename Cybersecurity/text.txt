@@ -1,0 +1,38 @@
+COMP.2030					LAB 6
+
+NAME: AJ Audet
+When x and y are 8 bits long, and have values 0x00 and 0x7F, respectively, show result of the following expressions represented in hexadecimal:
+
+
+~x & y				!x & y				~x && y	
+	
+x : 0000 0000				!x = 0000 0001			~x:1111 1111
+~x:1111 1111				y:  0111 1111				y:  0111 1111
+y:  0111 1111				—--------------				—--------------	
+—---------------				0000 0001				0000 0001
+0111 1111				0x01					0x01 (true)
+0x7F
+
+
+
+It turns out there is a number that is written in base-7 as “AB” and in base-9 as “BA”, for some choice of “A” and “B” between 1 and 6, respectively. What is this number (in decimal) and what are A and B (remember, neither is 0)?
+N= AB = 7A+B
+N = BA = 9B+A
+
+7A - A = 9B - B => 6A = 8B => 3A = 4B, A = 4, B = 3
+4(7) + 3 = 28 + 3 => 31
+3(9) + 4 =  27 + 4 => 31
+
+The Greek mathematician Archimedes proved that the lower bound of π is 223/71. Encode the 223/71 into the IEEE floating-point format with 4-bit exponent and 8-bit fraction.
+Exponent:  			Fraction: 
+            1000				10010010
+
+
+
+(15 pt) Consider an IEEE floating point format with 4-bit exponent and 8-bit fraction (no sign bit). Show the values of the following IEEE floating point representations in binary scientific notations (1.1x2-3, for example) (the first four bits are exponent bits).
+
+1110  11110000 –  	1.1 x 2^7
+
+1000  00001111 –	1.05 x 2^1 
+
+0000  11110000 – 	.11 x 2^-6

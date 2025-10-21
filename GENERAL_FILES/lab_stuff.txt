@@ -1,0 +1,28 @@
+
+How to copy files using scp
+
+go to: https://linux.die.net/man/1/scp for more info
+
+Syntax:
+
+scp <source> <destination>
+To copy a file from B to A while logged into B:
+
+scp /path/to/file username@a:/path/to/destination
+To copy a file from B to A while logged into A:
+
+scp username@b:/path/to/file /path/to/destination
+
+
+for lab computer to personal 
+
+scp -r email@cs.uml.edu:/path/to/file /path/to/destination
+
+    typical path to destination: /Users/hazelaudet/VSCODE/AJAUDET/150381581/COLLEGE
+
+    typical path from : /home/undergrad/2028/aaudet/Spring2025/COMP1020/HANGMAN/lab_
+
+    flags: -r for full directory
+
+
+realpath : use to get current directory from both remote machine and personal machine makes it easy to copy to

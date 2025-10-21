@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/hazelaudet/VSCODE/AJAUDET/UMASS-LOWELL/Computing3/Lab/Lab4",
+      "program": "/Users/hazelaudet/VSCODE/AJAUDET/UMASS-LOWELL/Computing3/Lab/Lab4/build/Debug/outDebug"
+    }
+  ]
+}
