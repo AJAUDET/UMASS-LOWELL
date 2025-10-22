@@ -59,6 +59,18 @@ LinkedList::LinkedList(Node* node)
     head = node;
 }
 
+LinkedList::~LinkedList()
+{
+    Node* curr = head;
+    while (curr != nullptr)
+    {
+        Node* temp = curr->getNext();
+        delete curr;
+        curr = temp;
+    }
+    head = nullptr;
+}
+
 // create a deep copy of the given list
 LinkedList::LinkedList(const LinkedList& list)
 {

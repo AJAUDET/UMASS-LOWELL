@@ -26,6 +26,7 @@ class LinkedList
   LinkedList(Node* node);                   // Node Constructor
   LinkedList(const LinkedList& list);       // Copy Constructor
   LinkedList(int* arr, int size);           // Array Constructor
+  ~LinkedList();
 
   void preAppend(int data);
   void postAppend(int data);
