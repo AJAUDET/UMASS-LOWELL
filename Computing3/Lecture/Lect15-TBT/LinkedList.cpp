@@ -153,3 +153,33 @@ ostream& operator<<(ostream& out, const LinkedList& list)
     out << "->nullptr";
     return out;
 }
+
+LinkedList& LinkedList::operator=(const LinkedList& right)
+{
+    if (&right.head == &head)
+    {
+        return *this;
+    }
+
+    Node* clear;
+    for (clear = head; clear != nullptr;)
+    {
+        clear = head->getNext();
+        head->setNext(nullptr);
+        delete head;
+        head = clear;
+    }
+
+    head = new Node(right.head->getData());
+    Node* curr = head;
+    Node* temp = right.head->getNext();
+
+    while (temp != nullptr)
+    {
+        curr->setNext(new Node(temp->getData()));
+        curr = curr->getNext();
+        temp = temp->getNext();
+    }
+
+    return *this;
+}

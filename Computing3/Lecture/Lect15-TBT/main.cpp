@@ -41,6 +41,16 @@ int main()
     LinkedList arrList(nums, 5);
     LinkedList copyList(arrList);
     LinkedList singleList(33);
+    LinkedList testList(432), otherTest;
+    otherTest = testList;
+
+    cout << "---Assignment Linked Lists---" << endl;
+    
+    cout << "Test linked List:\t\t";
+    cout << testList << endl;
+
+    cout << "Copy of Test linked List:\t\t";
+    cout << otherTest << endl;
 
     cout << "---Unmodified Linked Lists---" << endl;
 

@@ -34,6 +34,7 @@ class LinkedList
   const Node* getHead() const;
 
   friend ostream& operator<<(ostream& out, const LinkedList& list);
+  LinkedList& operator=(const LinkedList& right);
 };
 
 ostream& operator<<(ostream& out, const LinkedList& list);
