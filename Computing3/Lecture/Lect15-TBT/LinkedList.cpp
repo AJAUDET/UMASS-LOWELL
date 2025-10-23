@@ -154,6 +154,7 @@ ostream& operator<<(ostream& out, const LinkedList& list)
     return out;
 }
 
+// Copy Assignment Operator
 LinkedList& LinkedList::operator=(const LinkedList& right)
 {
     if (&right.head == &head)
