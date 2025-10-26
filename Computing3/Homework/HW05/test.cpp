@@ -2,7 +2,7 @@
     Author: AJ Audet
     Date: 10/26/2025
     Purpose: using boost to test our dynamic string code
-    Time Spent: 2.5 hrs 
+    Time Spent: 2.5 hrs
 */
 /*
 Computing III -- COMP.2010 Honor Statement
@@ -29,55 +29,60 @@ Name:   AJ Audet
 #include <boost/test/included/unit_test.hpp>
 #include "DynamicStringArray.hpp"
 
-BOOST_AUTO_TEST_CASE(test_default_constructor) {
+BOOST_AUTO_TEST_CASE(test_default_constructor)
+{
     DynamicStringArray arr;
     BOOST_REQUIRE_EQUAL(arr.getSize(), 0);
 }
 
-BOOST_AUTO_TEST_CASE(test_getSize) {
+BOOST_AUTO_TEST_CASE(test_getSize)
+{
     DynamicStringArray arr;
     BOOST_REQUIRE_EQUAL(arr.getSize(), 0);
-    
+
     arr.addEntry("first");
     BOOST_REQUIRE_EQUAL(arr.getSize(), 1);
-    
+
     arr.addEntry("second");
     BOOST_REQUIRE_EQUAL(arr.getSize(), 2);
 }
 
-BOOST_AUTO_TEST_CASE(test_addEntry) {
+BOOST_AUTO_TEST_CASE(test_addEntry)
+{
     DynamicStringArray arr;
-    
+
     arr.addEntry("apple");
     BOOST_REQUIRE_EQUAL(arr.getSize(), 1);
-    
+
     arr.addEntry("banana");
     BOOST_REQUIRE_EQUAL(arr.getSize(), 2);
-    
+
     arr.addEntry("cherry");
     BOOST_REQUIRE_EQUAL(arr.getSize(), 3);
 }
 
-BOOST_AUTO_TEST_CASE(test_getEntry_valid) {
+BOOST_AUTO_TEST_CASE(test_getEntry_valid)
+{
     DynamicStringArray arr;
     arr.addEntry("first");
     arr.addEntry("second");
     arr.addEntry("third");
-    
-    string* ptr = arr.getEntry(0);
+
+    string *ptr = arr.getEntry(0);
     BOOST_REQUIRE(ptr != nullptr);
     BOOST_REQUIRE_EQUAL(*ptr, "first");
-    
+
     ptr = arr.getEntry(1);
     BOOST_REQUIRE(ptr != nullptr);
     BOOST_REQUIRE_EQUAL(*ptr, "second");
-    
+
     ptr = arr.getEntry(2);
     BOOST_REQUIRE(ptr != nullptr);
     BOOST_REQUIRE_EQUAL(*ptr, "third");
 }
 
-BOOST_AUTO_TEST_CASE(test_getEntry_invalid) {
+BOOST_AUTO_TEST_CASE(test_getEntry_invalid)
+{
     DynamicStringArray arr;
     arr.addEntry("test");
 
@@ -89,12 +94,13 @@ BOOST_AUTO_TEST_CASE(test_getEntry_invalid) {
     BOOST_REQUIRE(emptyArr.getEntry(0) == nullptr);
 }
 
-BOOST_AUTO_TEST_CASE(test_deleteEntry_exists) {
+BOOST_AUTO_TEST_CASE(test_deleteEntry_exists)
+{
     DynamicStringArray arr;
     arr.addEntry("apple");
     arr.addEntry("banana");
     arr.addEntry("cherry");
-    
+
     bool result = arr.deleteEntry("banana");
     BOOST_REQUIRE_EQUAL(result, true);
     BOOST_REQUIRE_EQUAL(arr.getSize(), 2);
@@ -103,31 +109,34 @@ BOOST_AUTO_TEST_CASE(test_deleteEntry_exists) {
     BOOST_REQUIRE_EQUAL(*arr.getEntry(1), "cherry");
 }
 
-BOOST_AUTO_TEST_CASE(test_deleteEntry_not_exists) {
+BOOST_AUTO_TEST_CASE(test_deleteEntry_not_exists)
+{
     DynamicStringArray arr;
     arr.addEntry("apple");
     arr.addEntry("banana");
-    
+
     bool result = arr.deleteEntry("orange");
     BOOST_REQUIRE_EQUAL(result, false);
     BOOST_REQUIRE_EQUAL(arr.getSize(), 2);
 }
 
-BOOST_AUTO_TEST_CASE(test_deleteEntry_last_element) {
+BOOST_AUTO_TEST_CASE(test_deleteEntry_last_element)
+{
     DynamicStringArray arr;
     arr.addEntry("only");
-    
+
     bool result = arr.deleteEntry("only");
     BOOST_REQUIRE_EQUAL(result, true);
     BOOST_REQUIRE_EQUAL(arr.getSize(), 0);
 }
 
-BOOST_AUTO_TEST_CASE(test_copy_constructor) {
+BOOST_AUTO_TEST_CASE(test_copy_constructor)
+{
     DynamicStringArray arr1;
     arr1.addEntry("first");
     arr1.addEntry("second");
     arr1.addEntry("third");
-    
+
     DynamicStringArray arr2(arr1);
 
     BOOST_REQUIRE_EQUAL(arr2.getSize(), 3);
@@ -143,28 +152,29 @@ BOOST_AUTO_TEST_CASE(test_copy_constructor) {
     BOOST_REQUIRE_EQUAL(arr2.getSize(), 3);
 }
 
-BOOST_AUTO_TEST_CASE(test_copy_constructor_empty) {
+BOOST_AUTO_TEST_CASE(test_copy_constructor_empty)
+{
     DynamicStringArray arr1;
     DynamicStringArray arr2(arr1);
-    
+
     BOOST_REQUIRE_EQUAL(arr2.getSize(), 0);
 }
 
-BOOST_AUTO_TEST_CASE(test_copy_assignment) {
+BOOST_AUTO_TEST_CASE(test_copy_assignment)
+{
     DynamicStringArray arr1;
     arr1.addEntry("alpha");
     arr1.addEntry("beta");
-    
+
     DynamicStringArray arr2;
     arr2.addEntry("gamma");
-    
+
     arr2 = arr1;
 
     BOOST_REQUIRE_EQUAL(arr2.getSize(), 2);
-    
+
     BOOST_REQUIRE_EQUAL(*arr2.getEntry(0), "alpha");
     BOOST_REQUIRE_EQUAL(*arr2.getEntry(1), "beta");
-    
 
     BOOST_REQUIRE(arr1.getEntry(0) != arr2.getEntry(0));
 
@@ -173,18 +183,20 @@ BOOST_AUTO_TEST_CASE(test_copy_assignment) {
     BOOST_REQUIRE_EQUAL(arr2.getSize(), 2);
 }
 
-BOOST_AUTO_TEST_CASE(test_copy_assignment_self) {
+BOOST_AUTO_TEST_CASE(test_copy_assignment_self)
+{
     DynamicStringArray arr;
     arr.addEntry("test");
-    
+
     arr = arr;
-    
+
     BOOST_REQUIRE_EQUAL(arr.getSize(), 1);
     BOOST_REQUIRE_EQUAL(*arr.getEntry(0), "test");
 }
 
-BOOST_AUTO_TEST_CASE(test_destructor) {
-    DynamicStringArray* arr = new DynamicStringArray();
+BOOST_AUTO_TEST_CASE(test_destructor)
+{
+    DynamicStringArray *arr = new DynamicStringArray();
     arr->addEntry("test1");
     arr->addEntry("test2");
     delete arr;
