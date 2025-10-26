@@ -9,7 +9,7 @@ DynamicStringArray::DynamicStringArray() {
 // copy constructor
 DynamicStringArray::DynamicStringArray(const DynamicStringArray& other) {
     size = other.size;
-    
+
     if (size == 0) {
         dynamicArray = nullptr;
     } else {
@@ -26,12 +26,12 @@ DynamicStringArray& DynamicStringArray::operator=(const DynamicStringArray& othe
     if (this == &other) {
         return *this;
     }
-    
+
     delete[] dynamicArray;
     
     // copy size
     size = other.size;
-    
+
     // copy elements
     if (size == 0) {
         dynamicArray = nullptr;
@@ -41,7 +41,7 @@ DynamicStringArray& DynamicStringArray::operator=(const DynamicStringArray& othe
             dynamicArray[i] = other.dynamicArray[i];
         }
     }
-    
+
     return *this;
 }
 
@@ -60,18 +60,18 @@ int DynamicStringArray::getSize() const {
 void DynamicStringArray::addEntry(const string& entry) {
     // create new array one element larger
     string* newArray = new string[size + 1];
-    
+
     // copy all elements from old array
     for (int i = 0; i < size; i++) {
         newArray[i] = dynamicArray[i];
     }
-    
+
     // add new string to the end
     newArray[size] = entry;
-    
+
     // delete old array
     delete[] dynamicArray;
-    
+
     // update pointer and size
     dynamicArray = newArray;
     size++;
@@ -88,12 +88,12 @@ bool DynamicStringArray::deleteEntry(const string& entry) {
             break;
         }
     }
-    
+
     // if not found, return false
     if (foundIndex == -1) {
         return false;
     }
-    
+
     // handle case where array becomes empty
     if (size == 1) {
         delete[] dynamicArray;
@@ -101,9 +101,9 @@ bool DynamicStringArray::deleteEntry(const string& entry) {
         size = 0;
         return true;
     }
-    
+
     string* newArray = new string[size - 1];
-    
+
     // copy all elements to new array
     int newIndex = 0;
     for (int i = 0; i < size; i++) {
@@ -112,14 +112,14 @@ bool DynamicStringArray::deleteEntry(const string& entry) {
             newIndex++;
         }
     }
-    
+
     // delete old array
     delete[] dynamicArray;
-    
+
     // update pointer and size
     dynamicArray = newArray;
     size--;
-    
+
     return true;
 }
 
