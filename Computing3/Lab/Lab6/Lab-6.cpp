@@ -9,7 +9,7 @@ using namespace std;
 template<typename T>
 class BSTNode {
 
-public:
+ public:
 	// Constructors, etc.
 	BSTNode() : _data(0), _left(nullptr), _right(nullptr) {} // default constructor
     BSTNode(T data) : _left(nullptr), _right(nullptr) { _data = data; } // value constructor
@@ -38,9 +38,9 @@ public:
 	// ***** Change the implementation of this insertion operator
 	// ***** in order to switch to pre- or post-order display
 	friend ostream& operator<< (ostream& out, const BSTNode<T>& b)
-		{ b.inOrderDisplay(out); return out; }
+		{ b.preOrderDisplay(out); return out;};
 	
-private:
+ private:
 	T _data;
     BSTNode<T>* _left;
     BSTNode<T>* _right;
@@ -89,19 +89,28 @@ BSTNode<T>& BSTNode<T>::operator= (BSTNode& b) {
 template<typename T>
 void BSTNode<T>::insert(const T& data) {
 	// comment out the next line when you've completed this function!
-	cout << "BSTNode<T>::insert called with data == " << data << endl;
-	
-	/**
-	 *  ***** Write me! *****
-	 */
+	// cout << "BSTNode<T>::insert called with data == " << data << endl;
+	if (data < _data) {
+        if (_left != nullptr) {
+            _left->insert(data);  // Recurse on left child
+        } else {
+            addLeft(data);  // Create new left child
+        }
+    }
+    else if (data > _data) {
+        if (_right != nullptr) {
+            _right->insert(data);  // Recurse on right child
+        } else {
+            addRight(data);  // Create new right child
+        }
+    }
 }
-
 
 template<typename T>
 void BSTNode<T>::inOrderDisplay(ostream& out) const {
 	if (_left != nullptr) {
-	    _left->inOrderDisplay(out);
 	    out << ", ";
+        _left->inOrderDisplay(out);
 	}
 	out << _data;
 	if (_right != nullptr) {
@@ -117,23 +126,35 @@ void BSTNode<T>::inOrderDisplay(ostream& out) const {
 template<typename T>
 void BSTNode<T>::preOrderDisplay(ostream& out) const {
 	// comment out the next line when you've completed this function!
-	cout << "BSTNode<T>::preOrderDisplay called\n";
+	// cout << "BSTNode<T>::preOrderDisplay called\n";
 	
     // SLR
-	/**
-	 *  ***** Write me! *****
-	 */
+    out << _data;
+    if (_left != nullptr) {
+        out << ", ";
+        _left->preOrderDisplay(out);
+    }
+    if (_right != nullptr) {
+        out << ", ";
+        _right->preOrderDisplay(out);
+    }
 }
 
 template<typename T>
 void BSTNode<T>::postOrderDisplay(ostream& out) const {
 	// comment out the next line when you've completed this function!
-	cout << "BSTNode<T>::postOrderDisplay called\n";
+	// cout << "BSTNode<T>::postOrderDisplay called\n";
 	
     // LRS
-	/**
-	 *  ***** Write me! *****
-	 */
+    if (_left != nullptr) {
+        _left->postOrderDisplay(out);
+        out << ", ";
+    }
+    if (_right != nullptr) {
+        _right->postOrderDisplay(out);
+        out << ", ";
+    }
+    out << _data;
 }
 
 
