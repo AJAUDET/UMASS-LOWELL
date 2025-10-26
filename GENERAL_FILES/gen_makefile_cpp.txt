@@ -1,0 +1,18 @@
+CC = g++
+CFLAGS = -Wall -g
+OBJECTS = main.o file1.o
+
+program: $(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS) -o program.exe
+
+main.o:main.cpp 
+	$(CC) $(CFLAGS) -c main.cpp
+
+file1.o:file1.cpp
+	$(CC) $(CFLAGS) -c file1.cpp
+
+test:
+	g++ file1.cpp test.cpp -o test -lboost_unit_test_framework
+
+clean:
+	rm -f $(OBJECTS) program.exe test
