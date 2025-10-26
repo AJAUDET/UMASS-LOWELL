@@ -28,7 +28,7 @@ DynamicStringArray& DynamicStringArray::operator=(const DynamicStringArray& othe
     }
 
     delete[] dynamicArray;
-    
+
     // copy size
     size = other.size;
 
