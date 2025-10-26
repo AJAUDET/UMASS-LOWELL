@@ -11,7 +11,7 @@ class DynamicStringArray {
   DynamicStringArray& operator=(const DynamicStringArray& other);
   ~DynamicStringArray();
   int getSize() const;
-  void addEntry(const std::string& entry);
-  bool deleteEntry(const std::string& entry);
+  void addEntry(const string& entry);
+  bool deleteEntry(const string& entry);
   string* getEntry(int index);
 };
