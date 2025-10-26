@@ -28,6 +28,8 @@ Name:   AJ Audet
 #define BOOST_TEST_MODULE DynamicStringArrayTests
 #include <boost/test/included/unit_test.hpp>
 #include "DynamicStringArray.hpp"
+#include <string>
+using namespace std;
 
 BOOST_AUTO_TEST_CASE(test_default_constructor)
 {
