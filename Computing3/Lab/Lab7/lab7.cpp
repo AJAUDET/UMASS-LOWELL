@@ -1,10 +1,9 @@
-#undef debug
-
 #include <iostream>
 #include <string>
-
+#include <list>
+#include <map>
 using namespace std;
-
+#undef debug
 
 template<typename T>
 class BSTNode {
@@ -38,7 +37,9 @@ class BSTNode {
 	// ***** Change the implementation of this insertion operator
 	// ***** in order to switch to pre- or post-order display
 	friend ostream& operator<< (ostream& out, const BSTNode<T>& b)
-		{ b.postOrderDisplay(out); return out;};
+		{ b.preOrderDisplay(out); return out;};
+
+    void listify(list<T>& p) const;
 	
  private:
 	T _data;
@@ -109,11 +110,12 @@ void BSTNode<T>::insert(const T& data) {
 template<typename T>
 void BSTNode<T>::inOrderDisplay(ostream& out) const {
 	if (_left != nullptr) {
+	    out << ", ";
         _left->inOrderDisplay(out);
 	}
 	out << _data;
-	out << ", ";
 	if (_right != nullptr) {
+	    out << ", ";
 	    _right->inOrderDisplay(out);
 	}
 }
@@ -156,6 +158,17 @@ void BSTNode<T>::postOrderDisplay(ostream& out) const {
     out << _data;
 }
 
+template <typename T>
+void BSTNode<T>::listify(list<T>& p) const {
+	if (_left != nullptr) {
+        _left->listify(p);
+	}
+    p.push_back(_data);
+    if (_right != nullptr)
+    {
+        _right->listify(p);
+    }
+}
 
 int main(void) {
 	BSTNode<int> iroot(100);
@@ -174,6 +187,90 @@ int main(void) {
 	sroot.insert("Saturday");
 	cout << "sroot == " << sroot << endl;
 
+    list<int> iRootList;
+    iroot.listify(iRootList);
+    list<string> sRootList;
+    sroot.listify(sRootList);
+
+    // --- Forward iteraror ---
+    cout << "iRootList (forward iterator) == ";
+    for (auto p = iRootList.begin(); p != iRootList.end(); ++p)
+    {
+        cout << *p << " ";  // change iroot
+    }
+    cout << endl;
+
+    // --- Reverse iteraror ---
+    cout << "iRootList (reverse iterator) == ";
+    for (auto rp = iRootList.rbegin(); rp != iRootList.rend(); ++rp)
+    {
+        cout << *rp << " ";  // change iroot
+    }
+    cout << endl;
+    
+	// --- Ranged For Loop ---
+	cout << "iRootList (ranged for loop) == ";
+	for(auto i : iRootList) {
+		cout << i << " ";	
+	}
+    cout << endl;
+	
+    // --- Forward iteraror ---
+    cout << "sRootList (forward iterator) == ";
+    for (auto p = sRootList.begin(); p != sRootList.end(); ++p)
+    {
+        cout << *p << " ";
+    }
+    cout << endl;
+
+    // --- Reverse iteraror ---
+    cout << "sRootList (reverse iterator) == ";
+    for (auto rp = sRootList.rbegin(); rp != sRootList.rend(); ++rp)
+    {
+        cout << *rp << " ";
+    }
+    cout << endl;
+    
+	// --- Ranged For Loop ---
+	cout << "sRootList (ranged for loop) == ";
+	for(auto i : sRootList) {
+		cout << i << " ";	
+	}
+    cout << endl;
+
+	BSTNode<int> iroot4(1000);
+	iroot4.insert(2000);
+	iroot4.insert(3000);
+	iroot4.insert(4000);
+	iroot4.insert(5000);
+	
+	list<int> iRoot4List;
+	iroot4.listify(iRoot4List);
+
+	// Create a map
+	map<string, list<int>> mi;
+	mi["irootList"] = iRootList;
+	mi["iroot4List"] = iRoot4List;
+
+	// --- Ranged for loop ---
+    cout << "Contents of map<string, list<int>> mi (using ranged for loops): " << endl;
+    for (auto i : mi)
+    {	
+		const string& name = i.first;
+		const list<int>& value = i.second;
+
+		cout << name << ": ";
+		for (auto r : value)
+		    cout << r << " ";
+		
+    	cout << endl;
+	}
+
+	// --- Map Index Operator ---
+
+	// TBA -----------
+	
+
 #ifdef debug	
 	BSTNode<int> iroot2(iroot); // use copy constructor
 	cout << "\nAfter copy constructor:\n";
@@ -183,6 +280,7 @@ int main(void) {
 	iroot3 = iroot2; // use copy assignment operator
 	cout << "\nAfter copy assignment operator:\n";
 	cout << "iroot3 == " << iroot3 << endl << endl;
+
 #endif
 	
 	return 0;
