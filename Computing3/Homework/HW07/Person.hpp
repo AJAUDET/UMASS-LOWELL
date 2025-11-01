@@ -8,7 +8,7 @@ using namespace std;
 class Person {
  public:
     Person();
-    Person(string name);
+    Person(string new_name);
     Person(const Person& obj);
 
     string getName() const;

@@ -5,9 +5,9 @@ Person::Person()
     name = "none";
 }
 
-Person::Person(string name)
+Person::Person(string new_name)
 {
-    name = name;
+    name = new_name;
 }
 
 Person::Person(const Person& obj)

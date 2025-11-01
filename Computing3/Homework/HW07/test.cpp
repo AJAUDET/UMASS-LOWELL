@@ -35,3 +35,30 @@ BOOST_AUTO_TEST_CASE(testPersonDEFAULT)
     Person p1;
     BOOST_REQUIRE_EQUAL(p1.getName(), "none");
 }
+
+BOOST_AUTO_TEST_CASE(testPersonVALUE)
+{
+    Person p2("Bob");
+    BOOST_REQUIRE_EQUAL(p2.getName(), "Bob");
+}
+
+BOOST_AUTO_TEST_CASE(testPersonCOPY)
+{
+    Person p2("Bob");
+    Person p3(p2);
+    BOOST_REQUIRE_EQUAL(p3.getName(), p2.getName());
+}
+
+BOOST_AUTO_TEST_CASE(testPersonGETTER)
+{
+    Person p1;
+    p1.getName();
+}
+
+BOOST_AUTO_TEST_CASE(testInsertion)
+{
+    Person p1;
+    cout << "Whats your name: ";
+    cin >> p1;
+    cout << endl << p1.getName();
+}
