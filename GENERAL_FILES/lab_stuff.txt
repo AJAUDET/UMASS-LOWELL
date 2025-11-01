@@ -26,3 +26,5 @@ scp -r email@cs.uml.edu:/path/to/file /path/to/destination
 
 
 realpath : use to get current directory from both remote machine and personal machine makes it easy to copy to
+
+/Users/hazelaudet/Downloads
