@@ -29,6 +29,7 @@ Name:   AJ Audet
 #define BOOST_TEST_MODULE DynamicStringArrayTests
 #include <boost/test/unit_test.hpp>
 #include "Person.hpp"
+#include "Vehicle.hpp"
 
 BOOST_AUTO_TEST_CASE(testPersonDEFAULT)
 {
@@ -55,10 +56,71 @@ BOOST_AUTO_TEST_CASE(testPersonGETTER)
     p1.getName();
 }
 
-BOOST_AUTO_TEST_CASE(testInsertion)
+BOOST_AUTO_TEST_CASE(testPersonASSIGNMENT)
 {
-    Person p1;
-    cout << "Whats your name: ";
-    cin >> p1;
-    cout << endl << p1.getName();
+    Person p2("Bob");
+    Person p3 = p2;
+    BOOST_REQUIRE_EQUAL(p3.getName(), p2.getName());
+}
+
+BOOST_AUTO_TEST_CASE(testPersonInsertion)
+{
+    string name;
+    cout << "What's your name: ";
+    getline(cin, name);
+    Person p1(name);
+    cout << p1 << endl;
+}
+
+BOOST_AUTO_TEST_CASE(testVehicleDEFAULT)
+{
+    Vehicle v1;
+    BOOST_REQUIRE_EQUAL(v1.getOwner(), "none");
+    BOOST_REQUIRE_EQUAL(v1.getCylinders(), 0);
+    BOOST_REQUIRE_EQUAL(v1.getManufacturer(), "none");
+}
+
+BOOST_AUTO_TEST_CASE(testVehicleVALUE)
+{
+    Person p1("Bob");
+    Vehicle v1(p1, 3, "Ford");
+    BOOST_REQUIRE_EQUAL(v1.getOwner(), "Bob");
+    BOOST_REQUIRE_EQUAL(v1.getCylinders(), 3);
+    BOOST_REQUIRE_EQUAL(v1.getManufacturer(), "Ford");
+}
+
+BOOST_AUTO_TEST_CASE(testVehicleCOPY)
+{
+    Person p1("Bob");
+    Vehicle v1(p1, 3, "Ford");
+    Vehicle v2(v1);
+    BOOST_REQUIRE_EQUAL(v2.getOwner(), v1.getOwner());
+    BOOST_REQUIRE_EQUAL(v2.getCylinders(), v1.getCylinders());
+    BOOST_REQUIRE_EQUAL(v2.getManufacturer(), v1.getManufacturer());
+}
+
+BOOST_AUTO_TEST_CASE(testVehicleGETTER)
+{
+    Vehicle v1;
+    v1.getOwner();
+    v1.getCylinders();
+    v1.getManufacturer();
+}
+
+BOOST_AUTO_TEST_CASE(testVehicleInsertion)
+{
+    string owner;
+    string manufacturer;
+    int cylinders;
+    cout << "What's your name: ";
+    getline(cin, owner);
+    Person p1(owner);
+
+    cout << "How many cylinders does your engine have: ";
+    cin >> cylinders;
+
+    cout << "What is your vehicle's manufacturer: ";
+    cin >> manufacturer;
+    Vehicle v1(p1, cylinders, manufacturer);
+    cout << v1 << endl;
 }
