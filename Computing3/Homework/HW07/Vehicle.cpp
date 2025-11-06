@@ -26,7 +26,7 @@ string Vehicle::getOwner()
     return owner.getName();
 }
 
-int Vehicle::getCylinders()
+int Vehicle::numCylinders()
 {
     return cylinders;
 }

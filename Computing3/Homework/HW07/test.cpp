@@ -28,8 +28,9 @@ Name:   AJ Audet
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE DynamicStringArrayTests
 #include <boost/test/unit_test.hpp>
-#include "Person.hpp"
 #include "Vehicle.hpp"
+#include <string>
+using namespace std;
 
 BOOST_AUTO_TEST_CASE(testPersonDEFAULT)
 {
@@ -76,7 +77,7 @@ BOOST_AUTO_TEST_CASE(testVehicleDEFAULT)
 {
     Vehicle v1;
     BOOST_REQUIRE_EQUAL(v1.getOwner(), "none");
-    BOOST_REQUIRE_EQUAL(v1.getCylinders(), 0);
+    BOOST_REQUIRE_EQUAL(v1.numCylinders(), 0);
     BOOST_REQUIRE_EQUAL(v1.getManufacturer(), "none");
 }
 
@@ -85,7 +86,7 @@ BOOST_AUTO_TEST_CASE(testVehicleVALUE)
     Person p1("Bob");
     Vehicle v1(p1, 3, "Ford");
     BOOST_REQUIRE_EQUAL(v1.getOwner(), "Bob");
-    BOOST_REQUIRE_EQUAL(v1.getCylinders(), 3);
+    BOOST_REQUIRE_EQUAL(v1.numCylinders(), 3);
     BOOST_REQUIRE_EQUAL(v1.getManufacturer(), "Ford");
 }
 
@@ -95,7 +96,7 @@ BOOST_AUTO_TEST_CASE(testVehicleCOPY)
     Vehicle v1(p1, 3, "Ford");
     Vehicle v2(v1);
     BOOST_REQUIRE_EQUAL(v2.getOwner(), v1.getOwner());
-    BOOST_REQUIRE_EQUAL(v2.getCylinders(), v1.getCylinders());
+    BOOST_REQUIRE_EQUAL(v2.numCylinders(), v1.numCylinders());
     BOOST_REQUIRE_EQUAL(v2.getManufacturer(), v1.getManufacturer());
 }
 
@@ -103,7 +104,7 @@ BOOST_AUTO_TEST_CASE(testVehicleGETTER)
 {
     Vehicle v1;
     v1.getOwner();
-    v1.getCylinders();
+    v1.numCylinders();
     v1.getManufacturer();
 }
 

@@ -37,7 +37,7 @@ class BSTNode {
 	// ***** Change the implementation of this insertion operator
 	// ***** in order to switch to pre- or post-order display
 	friend ostream& operator<< (ostream& out, const BSTNode<T>& b)
-		{ b.preOrderDisplay(out); return out;};
+		{ b.inOrderDisplay(out); return out;};
 
     void listify(list<T>& p) const;
 	
@@ -110,13 +110,13 @@ void BSTNode<T>::insert(const T& data) {
 template<typename T>
 void BSTNode<T>::inOrderDisplay(ostream& out) const {
 	if (_left != nullptr) {
-	    out << ", ";
-        _left->inOrderDisplay(out);
+        _left->inOrderDisplay(out); // Continue traversing left as long as the child is not null
+		out << ", ";
 	}
-	out << _data;
+	out << _data; // Output the current node after its left nodes and before its right nodes
 	if (_right != nullptr) {
-	    out << ", ";
-	    _right->inOrderDisplay(out);
+		out << ", ";
+	    _right->inOrderDisplay(out); // Continue traversing right as long as the child is not null
 	}
 }
 
@@ -130,14 +130,14 @@ void BSTNode<T>::preOrderDisplay(ostream& out) const {
 	// cout << "BSTNode<T>::preOrderDisplay called\n";
 	
     // SLR
-    out << _data;
+    out << _data; // Output the current node first
     if (_left != nullptr) {
         out << ", ";
-        _left->preOrderDisplay(out);
+        _left->preOrderDisplay(out); // Continue traversing left as long as the child is not null
     }
     if (_right != nullptr) {
         out << ", ";
-        _right->preOrderDisplay(out);
+        _right->preOrderDisplay(out); // Continue traversing right as long as the child is not null
     }
 }
 
@@ -148,29 +148,30 @@ void BSTNode<T>::postOrderDisplay(ostream& out) const {
 	
     // LRS
     if (_left != nullptr) {
-        _left->postOrderDisplay(out);
+        _left->postOrderDisplay(out); // Continue traversing left as long as the child is not null
         out << ", ";
     }
     if (_right != nullptr) {
-        _right->postOrderDisplay(out);
+        _right->postOrderDisplay(out); // Continue traversing right as long as the child is not null
         out << ", ";
     }
-    out << _data;
+    out << _data; // Output the current node after its left and right nodes
 }
 
 template <typename T>
 void BSTNode<T>::listify(list<T>& p) const {
 	if (_left != nullptr) {
-        _left->listify(p);
+        _left->listify(p); // Recurse left
 	}
-    p.push_back(_data);
+    p.push_back(_data); // Add the current node's data to the list
     if (_right != nullptr)
     {
-        _right->listify(p);
+        _right->listify(p); // Recurse right
     }
 }
 
 int main(void) {
+	cout << endl;
 	BSTNode<int> iroot(100);
 	iroot.insert(10);
 	iroot.insert(20);
@@ -185,7 +186,9 @@ int main(void) {
 	sroot.insert("Thursday");
 	sroot.insert("Friday");
 	sroot.insert("Saturday");
-	cout << "sroot == " << sroot << endl;
+	cout << "sroot == " << sroot << endl << endl;
+
+	cout << "Creating irootList via iroot.listify" << endl << endl;
 
     list<int> iRootList;
     iroot.listify(iRootList);
@@ -196,7 +199,7 @@ int main(void) {
     cout << "iRootList (forward iterator) == ";
     for (auto p = iRootList.begin(); p != iRootList.end(); ++p)
     {
-        cout << *p << " ";  // change iroot
+        cout << *p << " ";
     }
     cout << endl;
 
@@ -204,7 +207,7 @@ int main(void) {
     cout << "iRootList (reverse iterator) == ";
     for (auto rp = iRootList.rbegin(); rp != iRootList.rend(); ++rp)
     {
-        cout << *rp << " ";  // change iroot
+        cout << *rp << " ";
     }
     cout << endl;
     
@@ -213,7 +216,9 @@ int main(void) {
 	for(auto i : iRootList) {
 		cout << i << " ";	
 	}
-    cout << endl;
+    cout << endl << endl;
+
+	cout << "Creating srootList via sroot.listify" << endl << endl;
 	
     // --- Forward iteraror ---
     cout << "sRootList (forward iterator) == ";
@@ -236,7 +241,7 @@ int main(void) {
 	for(auto i : sRootList) {
 		cout << i << " ";	
 	}
-    cout << endl;
+    cout << endl << endl;
 
 	BSTNode<int> iroot4(1000);
 	iroot4.insert(2000);
@@ -247,12 +252,15 @@ int main(void) {
 	list<int> iRoot4List;
 	iroot4.listify(iRoot4List);
 
+	cout << "iroot4 == " << iroot4 << endl << endl; // already overloaded the extraction operatorr
+	
 	// Create a map
 	map<string, list<int>> mi;
 	mi["irootList"] = iRootList;
 	mi["iroot4List"] = iRoot4List;
 
 	// --- Ranged for loop ---
+	cout << "Creating iroot4List via iroot4.listify" << endl << endl;
     cout << "Contents of map<string, list<int>> mi (using ranged for loops): " << endl;
     for (auto i : mi)
     {	
@@ -265,11 +273,20 @@ int main(void) {
 		
     	cout << endl;
 	}
+	cout << endl;
 
-	// --- Map Index Operator ---
+	// --- Map Index Operator --- (Display the content using the index operator [])
+	list<string> k = {"irootList", "iroot4List"};  // Create a list with 2 keys so we can access the map elements with [] operator
 
-	// TBA -----------
-	
+	cout << "Using map index operator:" << endl;
+	for (auto i : k) {  // Iterate through each string in the keys list
+		cout << "mi[\"" << i << "\"] == ";
+		for (auto v : mi[i]) {  // Use the map index operator to get the value stored under each key, then iterate to print
+			cout << v << " ";
+		}
+		cout << endl;
+	}
+	cout << endl;
 
 #ifdef debug	
 	BSTNode<int> iroot2(iroot); // use copy constructor

@@ -8,13 +8,13 @@ class Vehicle : public Person {
   Vehicle(Person new_owner, int new_cylinders, string new_manufacturer);
   Vehicle(const Vehicle &v_obj);
   string getOwner();
-  int getCylinders();
+  int numCylinders();
   string getManufacturer();
 
   friend istream& operator >>(istream& is, Vehicle& obj);
   friend ostream& operator <<(ostream& os, const Vehicle& obj);
 
-  private:
+ private:
   Person owner;
   int cylinders;
   string manufacturer;
