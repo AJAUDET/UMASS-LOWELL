@@ -2,7 +2,7 @@
     Author: AJ Audet
     Date: 11/1/2025
     Purpose: using inheritance to test the classes Vehicle and Person
-    Time Spent: 
+    Time Spent: 2 hours
 */
 /*
 Computing III -- COMP.2010 Honor Statement
@@ -27,45 +27,40 @@ Name:   AJ Audet
 
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE DynamicStringArrayTests
+#include <string>
+#include <iostream>
 #include <boost/test/unit_test.hpp>
 #include "Vehicle.hpp"
-#include <string>
 using namespace std;
 
-BOOST_AUTO_TEST_CASE(testPersonDEFAULT)
-{
+BOOST_AUTO_TEST_CASE(testPersonDEFAULT) {
     Person p1;
     BOOST_REQUIRE_EQUAL(p1.getName(), "none");
 }
 
-BOOST_AUTO_TEST_CASE(testPersonVALUE)
-{
+BOOST_AUTO_TEST_CASE(testPersonVALUE) {
     Person p2("Bob");
     BOOST_REQUIRE_EQUAL(p2.getName(), "Bob");
 }
 
-BOOST_AUTO_TEST_CASE(testPersonCOPY)
-{
+BOOST_AUTO_TEST_CASE(testPersonCOPY) {
     Person p2("Bob");
     Person p3(p2);
     BOOST_REQUIRE_EQUAL(p3.getName(), p2.getName());
 }
 
-BOOST_AUTO_TEST_CASE(testPersonGETTER)
-{
+BOOST_AUTO_TEST_CASE(testPersonGETTER) {
     Person p1;
     p1.getName();
 }
 
-BOOST_AUTO_TEST_CASE(testPersonASSIGNMENT)
-{
+BOOST_AUTO_TEST_CASE(testPersonASSIGNMENT) {
     Person p2("Bob");
     Person p3 = p2;
     BOOST_REQUIRE_EQUAL(p3.getName(), p2.getName());
 }
 
-BOOST_AUTO_TEST_CASE(testPersonInsertion)
-{
+BOOST_AUTO_TEST_CASE(testPersonInsertion) {
     string name;
     cout << "What's your name: ";
     getline(cin, name);
@@ -73,16 +68,14 @@ BOOST_AUTO_TEST_CASE(testPersonInsertion)
     cout << p1 << endl;
 }
 
-BOOST_AUTO_TEST_CASE(testVehicleDEFAULT)
-{
+BOOST_AUTO_TEST_CASE(testVehicleDEFAULT) {
     Vehicle v1;
     BOOST_REQUIRE_EQUAL(v1.getOwner(), "none");
     BOOST_REQUIRE_EQUAL(v1.numCylinders(), 0);
     BOOST_REQUIRE_EQUAL(v1.getManufacturer(), "none");
 }
 
-BOOST_AUTO_TEST_CASE(testVehicleVALUE)
-{
+BOOST_AUTO_TEST_CASE(testVehicleVALUE) {
     Person p1("Bob");
     Vehicle v1(p1, 3, "Ford");
     BOOST_REQUIRE_EQUAL(v1.getOwner(), "Bob");
@@ -90,8 +83,7 @@ BOOST_AUTO_TEST_CASE(testVehicleVALUE)
     BOOST_REQUIRE_EQUAL(v1.getManufacturer(), "Ford");
 }
 
-BOOST_AUTO_TEST_CASE(testVehicleCOPY)
-{
+BOOST_AUTO_TEST_CASE(testVehicleCOPY) {
     Person p1("Bob");
     Vehicle v1(p1, 3, "Ford");
     Vehicle v2(v1);
@@ -100,8 +92,7 @@ BOOST_AUTO_TEST_CASE(testVehicleCOPY)
     BOOST_REQUIRE_EQUAL(v2.getManufacturer(), v1.getManufacturer());
 }
 
-BOOST_AUTO_TEST_CASE(testVehicleASSIGNMENT)
-{
+BOOST_AUTO_TEST_CASE(testVehicleASSIGNMENT) {
     Person p1("Bob");
     Vehicle v1(p1, 3, "Ford");
     Vehicle v2 = v1;
@@ -110,16 +101,14 @@ BOOST_AUTO_TEST_CASE(testVehicleASSIGNMENT)
     BOOST_REQUIRE_EQUAL(v2.getManufacturer(), v1.getManufacturer());
 }
 
-BOOST_AUTO_TEST_CASE(testVehicleGETTER)
-{
+BOOST_AUTO_TEST_CASE(testVehicleGETTER) {
     Vehicle v1;
     v1.getOwner();
     v1.numCylinders();
     v1.getManufacturer();
 }
 
-BOOST_AUTO_TEST_CASE(testVehicleInsertion)
-{
+BOOST_AUTO_TEST_CASE(testVehicleInsertion) {
     string owner;
     string manufacturer;
     int cylinders;
@@ -136,8 +125,7 @@ BOOST_AUTO_TEST_CASE(testVehicleInsertion)
     cout << v1 << endl;
 }
 
-BOOST_AUTO_TEST_CASE(testTruckDEFAULT)
-{
+BOOST_AUTO_TEST_CASE(testTruckDEFAULT) {
     Truck t;
     BOOST_REQUIRE_EQUAL(t.getOwner(), "none");
     BOOST_REQUIRE_EQUAL(t.numCylinders(), 0);
@@ -146,8 +134,7 @@ BOOST_AUTO_TEST_CASE(testTruckDEFAULT)
     BOOST_REQUIRE_EQUAL(t.getTowingCapacity(), 0);
 }
 
-BOOST_AUTO_TEST_CASE(testTruckVALUE)
-{
+BOOST_AUTO_TEST_CASE(testTruckVALUE) {
     Person p("Bob");
     Vehicle v(p, 3, "Ford");
     Truck t(v, 1000.1, 35);
@@ -158,8 +145,7 @@ BOOST_AUTO_TEST_CASE(testTruckVALUE)
     BOOST_REQUIRE_EQUAL(t.getTowingCapacity(), 35);
 }
 
-BOOST_AUTO_TEST_CASE(testTruckCOPY)
-{
+BOOST_AUTO_TEST_CASE(testTruckCOPY) {
     Person p("Bob");
     Vehicle v(p, 3, "Ford");
     Truck t1(v, 1000.1, 35);
@@ -171,8 +157,7 @@ BOOST_AUTO_TEST_CASE(testTruckCOPY)
     BOOST_REQUIRE_EQUAL(t2.getTowingCapacity(), t1.getManufacturer());
 }
 
-BOOST_AUTO_TEST_CASE(testTruckASSIGNMENT)
-{
+BOOST_AUTO_TEST_CASE(testTruckASSIGNMENT) {
     Person p("Bob");
     Vehicle v(p, 3, "Ford");
     Truck t1(v, 1000.1, 35);
@@ -184,15 +169,13 @@ BOOST_AUTO_TEST_CASE(testTruckASSIGNMENT)
     BOOST_REQUIRE_EQUAL(t2.getTowingCapacity(), t1.getManufacturer());
 }
 
-BOOST_AUTO_TEST_CASE(testTruckGETTERS)
-{
+BOOST_AUTO_TEST_CASE(testTruckGETTERS) {
     Truck t;
     t.getLoadCapacity();
     t.getTowingCapacity();
 }
 
-BOOST_AUTO_TEST_CASE(testTruckINSERTION)
-{
+BOOST_AUTO_TEST_CASE(testTruckINSERTION) {
     string owner;
     string manufacturer;
     int cylinders, tow;

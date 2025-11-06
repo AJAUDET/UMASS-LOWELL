@@ -1,6 +1,8 @@
 #pragma once
-
+#include <string>
+#include <iostream>
 #include "Person.hpp"
+using namespace std;
 
 class Vehicle : public Person {
  public:
@@ -28,10 +30,11 @@ ostream& operator <<(ostream& os, const Vehicle& obj);
 
 class Truck : public Vehicle {
  public:
-  Truck(): vehicle(Vehicle()), loadCapacity(0.0), towingCapacity(0) {};
-  Truck(Vehicle v, double lc, int tc): vehicle(v), loadCapacity(lc), towingCapacity(tc) {};
+  Truck(): vehicle(Vehicle()), loadCapacity(0.0), towingCapacity(0) {}
+  Truck(Vehicle v, double lc, int tc): vehicle(v),
+    loadCapacity(lc), towingCapacity(tc) {}
   Truck(const Truck &t_obj);
-  ~Truck() { cout << "Vehicle deconstructor called " << endl; };
+  ~Truck() { cout << "Vehicle deconstructor called " << endl; }
 
   Truck &operator=(const Truck &t);
 
@@ -41,7 +44,7 @@ class Truck : public Vehicle {
   friend istream &operator>>(istream & is, Truck &t);
   friend ostream &operator<<(ostream &os, const Truck &t);
 
-private:
+ private:
   Vehicle vehicle;
   double loadCapacity;
   int towingCapacity;
