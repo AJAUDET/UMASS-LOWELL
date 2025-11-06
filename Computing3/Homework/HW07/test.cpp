@@ -153,8 +153,8 @@ BOOST_AUTO_TEST_CASE(testTruckCOPY) {
     BOOST_REQUIRE_EQUAL(t2.getOwner(), t1.getOwner());
     BOOST_REQUIRE_EQUAL(t2.numCylinders(), t1.numCylinders());
     BOOST_REQUIRE_EQUAL(t2.getManufacturer(), t1.getManufacturer());
-    BOOST_REQUIRE_EQUAL(t2.getLoadCapacity(), t1.getManufacturer());
-    BOOST_REQUIRE_EQUAL(t2.getTowingCapacity(), t1.getManufacturer());
+    BOOST_REQUIRE_EQUAL(t2.getLoadCapacity(), t1.getLoadCapacity());
+    BOOST_REQUIRE_EQUAL(t2.getTowingCapacity(), t1.getTowingCapacity());
 }
 
 BOOST_AUTO_TEST_CASE(testTruckASSIGNMENT) {
@@ -165,8 +165,8 @@ BOOST_AUTO_TEST_CASE(testTruckASSIGNMENT) {
     BOOST_REQUIRE_EQUAL(t2.getOwner(), t1.getOwner());
     BOOST_REQUIRE_EQUAL(t2.numCylinders(), t1.numCylinders());
     BOOST_REQUIRE_EQUAL(t2.getManufacturer(), t1.getManufacturer());
-    BOOST_REQUIRE_EQUAL(t2.getLoadCapacity(), t1.getManufacturer());
-    BOOST_REQUIRE_EQUAL(t2.getTowingCapacity(), t1.getManufacturer());
+    BOOST_REQUIRE_EQUAL(t2.getLoadCapacity(), t1.getLoadCapacity());
+    BOOST_REQUIRE_EQUAL(t2.getTowingCapacity(), t1.getTowingCapacity());
 }
 
 BOOST_AUTO_TEST_CASE(testTruckGETTERS) {
@@ -183,19 +183,24 @@ BOOST_AUTO_TEST_CASE(testTruckINSERTION) {
     cout << "What's your name: ";
     getline(cin, owner);
     Person p1(owner);
+    cout << endl;
 
     cout << "How many cylinders does your engine have: ";
     cin >> cylinders;
+    cout << endl;
 
     cout << "What is your vehicle's manufacturer: ";
     cin >> manufacturer;
     Vehicle v1(p1, cylinders, manufacturer);
+    cout << endl;
 
     cout << "What is your Truck's load capacity: ";
     cin >> load;
+    cout << endl;
 
     cout << "What is your Truck's towing capacity: ";
     cin >> tow;
+    cout << endl;
     Truck t(v1, load, tow);
 
     cout << t << endl;
