@@ -10,7 +10,7 @@ Person::Person(string new_name)
     name = new_name;
 }
 
-Person::Person(const Person& obj)
+Person::Person(const Person &obj)
 {
     name = obj.name;
 }
@@ -20,21 +20,22 @@ string Person::getName() const
     return name;
 }
 
-Person& Person::operator=(const Person& rhs)
+Person &Person::operator=(const Person &rhs)
 {
-        if (this != &rhs) {
-            name = rhs.name;
-        }
-        return *this;
+    if (this != &rhs)
+    {
+        name = rhs.name;
+    }
+    return *this;
 }
 
-istream& operator >>(istream& is, Person& obj)
+istream &operator>>(istream &is, Person &obj)
 {
     is >> obj.name;
     return is;
 }
 
-ostream& operator <<(ostream& os, const Person& obj)
+ostream &operator<<(ostream &os, const Person &obj)
 {
     os << obj.getName();
     return os;
