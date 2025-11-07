@@ -10,9 +10,9 @@ class Vehicle : public Person {
   Vehicle(Person new_owner, int new_cylinders, string new_manufacturer);
   Vehicle(const Vehicle &v_obj);
   ~Vehicle() { cout << "Vehicle deconstructor called " << endl; }
-  string getOwner();
-  int numCylinders();
-  string getManufacturer();
+  Person getOwner() const;
+  int getNumCylinders() const;
+  string getManufacturer() const;
 
   Vehicle& operator=(const Vehicle &v);
 
@@ -34,10 +34,11 @@ class Truck : public Vehicle {
   Truck(Vehicle v, double lc, int tc): vehicle(v),
     loadCapacity(lc), towingCapacity(tc) {}
   Truck(const Truck &t_obj);
-  ~Truck() { cout << "Vehicle deconstructor called " << endl; }
+  ~Truck() { cout << "Truck deconstructor called " << endl; }
 
   Truck &operator=(const Truck &t);
 
+  Vehicle getVehicle() const { return vehicle; }
   int getTowingCapacity() const { return towingCapacity; }
   double getLoadCapacity() const { return loadCapacity; }
 

@@ -1,85 +1,72 @@
-#include <string>
 #include "Vehicle.hpp"
+#include <iostream>
+using namespace std;
 
-Vehicle::Vehicle() {
-    owner = Person();
-    cylinders = 0;
-    manufacturer = "none";
-}
+// ===== VEHICLE =====
 
-Vehicle::Vehicle(Person new_owner, int new_cylinders, string new_manufacturer) {
-    owner = new_owner;
-    cylinders = new_cylinders;
-    manufacturer = new_manufacturer;
-}
+Vehicle::Vehicle()
+    : owner(Person("none")), cylinders(0), manufacturer("none") {}
 
-Vehicle::Vehicle(const Vehicle &v_obj) {
-    owner = v_obj.owner;
-    cylinders = v_obj.cylinders;
-    manufacturer = v_obj.manufacturer;
-}
+Vehicle::Vehicle(Person new_owner, int new_cylinders, std::string new_manufacturer)
+    : owner(new_owner), cylinders(new_cylinders), manufacturer(new_manufacturer) {}
 
-Vehicle& Vehicle::operator=(const Vehicle &v) {
-    if (this != &v) {
-        owner = v.owner;
-        cylinders = v.cylinders;
-        manufacturer = v.manufacturer;
+Vehicle::Vehicle(const Vehicle &v_obj)
+    : owner(v_obj.owner), cylinders(v_obj.cylinders), manufacturer(v_obj.manufacturer) {}
+
+Person Vehicle::getOwner() const { return owner; }
+int Vehicle::getNumCylinders() const { return cylinders; }
+std::string Vehicle::getManufacturer() const { return manufacturer; }
+
+Vehicle& Vehicle::operator=(const Vehicle &v_obj) {
+    if (this != &v_obj) {
+        owner = v_obj.owner;
+        cylinders = v_obj.cylinders;
+        manufacturer = v_obj.manufacturer;
     }
     return *this;
 }
 
-string Vehicle::getOwner() {
-    return owner.getName();
+std::ostream& operator<<(std::ostream& out, const Vehicle& v) {
+    out << "Manufacturer: " << v.manufacturer
+        << ", Cylinders: " << v.cylinders
+        << ", Owner: " << v.owner.getName();
+    return out;
 }
 
-int Vehicle::numCylinders() {
-    return cylinders;
+Vehicle::~Vehicle() {
+    cout << "Vehicle destructor called for " << manufacturer << endl;
 }
 
-string Vehicle::getManufacturer() {
-    return manufacturer;
-}
+// ===== TRUCK =====
 
-istream& operator >>(istream& is, Vehicle& obj) {
-    is >> obj.owner;
-    is >> obj.cylinders;
-    is >> obj.manufacturer;
-    return is;
-}
+Truck::Truck()
+    : Vehicle(), loadCapacity(0.0), towingCapacity(0) {}
 
-ostream& operator <<(ostream& os, const Vehicle& obj) {
-    os << obj.owner << " ";
-    os << obj.cylinders << " ";
-    os << obj.manufacturer;
-    return os;
-}
+Truck::Truck(Vehicle v_obj, double new_loadCap, int new_towCap)
+    : Vehicle(v_obj), loadCapacity(new_loadCap), towingCapacity(new_towCap) {}
 
-Truck::Truck(const Truck &t_obj) {
-    vehicle = t_obj.vehicle;
-    loadCapacity = t_obj.loadCapacity;
-    towingCapacity = t_obj.towingCapacity;
-}
+Truck::Truck(const Truck &t_obj)
+    : Vehicle(t_obj), loadCapacity(t_obj.loadCapacity), towingCapacity(t_obj.towingCapacity) {}
 
-Truck& Truck::operator=(const Truck &t) {
-    if (this != &t) {
-        vehicle = t.vehicle;
-        loadCapacity = t.loadCapacity;
-        towingCapacity = t.towingCapacity;
+double Truck::getLoadCapacity() const { return loadCapacity; }
+int Truck::getTowingCapacity() const { return towingCapacity; }
+
+Truck& Truck::operator=(const Truck &t_obj) {
+    if (this != &t_obj) {
+        Vehicle::operator=(t_obj);
+        loadCapacity = t_obj.loadCapacity;
+        towingCapacity = t_obj.towingCapacity;
     }
     return *this;
 }
 
-istream &operator>>(istream & is, Truck &t) {
-    is >> t.vehicle;
-    is >> t.loadCapacity;
-    is >> t.towingCapacity;
-
-    return is;
+std::ostream& operator<<(std::ostream& out, const Truck& t) {
+    out << static_cast<const Vehicle&>(t)
+        << ", Load capacity: " << t.loadCapacity
+        << ", Towing capacity: " << t.towingCapacity;
+    return out;
 }
 
-ostream &operator<<(ostream &os, const Truck &t) {
-    os << t.vehicle << " ";
-    os << t.loadCapacity << " ";
-    os << t.towingCapacity;
-    return os;
+Truck::~Truck() {
+    cout << "Truck destructor called\n";
 }
