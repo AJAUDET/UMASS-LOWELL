@@ -9,7 +9,7 @@ class Vehicle : public Person {
   Vehicle();
   Vehicle(Person new_owner, int new_cylinders, string new_manufacturer);
   Vehicle(const Vehicle &v_obj);
-  ~Vehicle() { cout << "Vehicle deconstructor called " << endl; }
+  ~Vehicle();
   Person getOwner() const;
   int getNumCylinders() const;
   string getManufacturer() const;
@@ -30,20 +30,19 @@ ostream& operator <<(ostream& os, const Vehicle& obj);
 
 class Truck : public Vehicle {
  public:
-  Truck(): vehicle(Vehicle()), loadCapacity(0.0), towingCapacity(0) {}
-  Truck(Vehicle v, double lc, int tc): vehicle(v),
-    loadCapacity(lc), towingCapacity(tc) {}
-  Truck(const Truck &t_obj);
-  ~Truck() { cout << "Truck deconstructor called " << endl; }
+   Truck();
+   Truck(Vehicle v, double lc, int tc);
+   Truck(const Truck &t_obj);
+   ~Truck();
 
-  Truck &operator=(const Truck &t);
+   Truck &operator=(const Truck &t);
 
-  Vehicle getVehicle() const { return vehicle; }
-  int getTowingCapacity() const { return towingCapacity; }
-  double getLoadCapacity() const { return loadCapacity; }
+   Vehicle getVehicle() const;
+   int getTowingCapacity() const;
+   double getLoadCapacity() const;
 
-  friend istream &operator>>(istream & is, Truck &t);
-  friend ostream &operator<<(ostream &os, const Truck &t);
+   friend istream &operator>>(istream &is, Truck &t);
+   friend ostream &operator<<(ostream &os, const Truck &t);
 
  private:
   Vehicle vehicle;
