@@ -1,6 +1,10 @@
 #pragma once
 
 #include "Person.hpp"
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 class Vehicle : public Person {
  public:
