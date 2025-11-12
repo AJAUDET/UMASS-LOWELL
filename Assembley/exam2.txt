@@ -1,0 +1,113 @@
+1) Number Bases
+    - BSN (bin sci notation)
+    - IEEE
+    - Decimal
+
+2) MIPS
+    - HWKS
+    - jal/jalr
+    - jr $ra
+    - sw, lw
+
+3) x86
+    - Memory addn
+    - MOV, CMP, LEA, SUB, TEST
+    - struct packing
+    - control flow
+
+
+REVIEW
+
+    0x86:
+        leaq 4(%rax, %rax, 2) %rsi =>  // read and write to memory
+        movq 4(%rax, %rax, 2) %rsi => %rsi = 4+%rax*3 // does not write memory
+
+        andq/testq %rax, %rax // andq changes the registers and changes flags, testq does not only sets flags
+        je L2
+
+
+        Mem:                    Reg:
+            - 0x10 = 3              - %rax 15
+            - 0x20 = 12             - %rcx 1
+                                    - %rdx 3
+
+        leaq 7(%rax, %rdx, 4), %rdi => 7 + 15 + (3*4) => 0x22
+        movq 1(%rcx, %rax, 2), %rdi => 1 + 1 + 2*15 => 0xC
+
+        struct w {
+            int total;
+            short arr[100];
+        };
+
+        %rax = &w 
+        %rdi = i    // index
+
+        movw 4(%rax, %rdi, 2)
+
+
+    IEEE:
+        - Bias EQTN ==> 2^(num_exp_bits - 1) - 1
+        - Special Numbers:
+            - EXP = 0, MANT = 0 ==> ZERO
+            - EXP = 0 ==> DENORMALIZED      (-1)^s * 0.MANT * 2^(1 - Bias)
+            - EXP = all 1's, MANT = 0 ==> INF
+            - EXP = all 1's, MANT != 0 ==> NAN
+        - Rounding
+        - FLT <=> BSN
+
+
+        1.0 0 1 _ _ _ _
+                0 0 * *      => Round DOWN
+                0 1 0 0...   => Round DOWN  // round to even
+                1 1 0 0...   => Round UP    // round to even
+                0 1 0 0...1  => Round UP    // half and a little more
+                1 1 0 0...1  => Round UP    // more than half we round up 
+
+        Float to BSN:
+            5 bit exp 
+            12 bit flt 
+            0x625
+
+            0 1 1 0 0 0 1 0 1 1 0 1
+            s e e e e e m m m m m m
+
+            bias = 2^n-1 -1 = 2^5-1 -1 = 2^4 - 1 = 15
+
+            (-1)^0 * 1.101101 * 2^(24-15) => 1.101101 x 2^9
+
+            NORM
+            (-1)^s * 1.M * 2^(exp-bias)
+
+            DENORM
+            (-1)^s * 0.M * 2^(1-bias)
+
+        1.011101110111*2^6
+        convert to 12B float, 4B exp
+
+        bias = 2^4-1 - 1 = 7
+        6 + 7 = 13 bias
+
+        s e e e e m m m m m m m
+        0 1 1 0 1 0 1 1 1 0 1 1 1 0 1 1 1
+
+        roll over
+        0 1 1 0 1 1 0 1 1 1 0 0
+        0x6BC
+    
+    Structs:
+
+    offset  struct zed {
+    0           char c; // 7B pad
+    8           void* p;
+    16          short s; // 6B pad
+            };
+            24B used
+
+    REPACK
+
+    offset  struct zed {
+    0           char c; // 1B pad
+    2           short s; // 4B pad
+    8           void* p; 
+            };
+            16B used 
