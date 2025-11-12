@@ -2,7 +2,7 @@
     Author: AJ Audet
     Date: 11/1/2025
     Purpose: using inheritance to test the classes Vehicle and Person
-    Time Spent: 
+    Time Spent: 2 hours
 */
 /*
 Computing III -- COMP.2010 Honor Statement
@@ -26,102 +26,152 @@ Name:   AJ Audet
 */
 
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE DynamicStringArrayTests
+#define BOOST_TEST_MODULE VehicleAndTruckTests
+
 #include <boost/test/unit_test.hpp>
-#include "Vehicle.hpp"
 #include <string>
+#include <iostream>
+#include "Vehicle.hpp"
 using namespace std;
 
-BOOST_AUTO_TEST_CASE(testPersonDEFAULT)
+// ===== Person Tests =====
+
+BOOST_AUTO_TEST_CASE(testPersonDefault)
 {
-    Person p1;
-    BOOST_REQUIRE_EQUAL(p1.getName(), "none");
+    Person p;
+    BOOST_REQUIRE_EQUAL(p.getName(), "none");
 }
 
-BOOST_AUTO_TEST_CASE(testPersonVALUE)
+BOOST_AUTO_TEST_CASE(testPersonValue)
 {
-    Person p2("Bob");
-    BOOST_REQUIRE_EQUAL(p2.getName(), "Bob");
+    Person p("Nous");
+    BOOST_REQUIRE_EQUAL(p.getName(), "Nous");
 }
 
-BOOST_AUTO_TEST_CASE(testPersonCOPY)
+BOOST_AUTO_TEST_CASE(testPersonCopy)
 {
-    Person p2("Bob");
-    Person p3(p2);
-    BOOST_REQUIRE_EQUAL(p3.getName(), p2.getName());
+    Person p1("Nanook");
+    Person p2(p1);
+    BOOST_REQUIRE_EQUAL(p2.getName(), "Nanook");
 }
 
-BOOST_AUTO_TEST_CASE(testPersonGETTER)
+BOOST_AUTO_TEST_CASE(testPersonAssign)
 {
-    Person p1;
-    p1.getName();
+    Person p1("Mythus");
+    Person p2;
+    p2 = p1;
+    BOOST_REQUIRE_EQUAL(p2.getName(), "Mythus");
 }
 
-BOOST_AUTO_TEST_CASE(testPersonASSIGNMENT)
+// ===== Vehicle Tests =====
+
+BOOST_AUTO_TEST_CASE(testVehicleDefault)
 {
-    Person p2("Bob");
-    Person p3 = p2;
-    BOOST_REQUIRE_EQUAL(p3.getName(), p2.getName());
+    Vehicle v;
+    BOOST_REQUIRE_EQUAL(v.getOwner().getName(), "none");
+    BOOST_REQUIRE_EQUAL(v.getNumCylinders(), 0);
+    BOOST_REQUIRE_EQUAL(v.getManufacturer(), "none");
 }
 
-BOOST_AUTO_TEST_CASE(testPersonInsertion)
+BOOST_AUTO_TEST_CASE(testVehicleValue)
 {
-    string name;
-    cout << "What's your name: ";
-    getline(cin, name);
-    Person p1(name);
-    cout << p1 << endl;
+    Person p("Aha");
+    Vehicle v(p, 4, "Toyota");
+    BOOST_REQUIRE_EQUAL(v.getOwner().getName(), "Aha");
+    BOOST_REQUIRE_EQUAL(v.getNumCylinders(), 4);
+    BOOST_REQUIRE_EQUAL(v.getManufacturer(), "Toyota");
 }
 
-BOOST_AUTO_TEST_CASE(testVehicleDEFAULT)
+BOOST_AUTO_TEST_CASE(testVehicleCopy)
 {
-    Vehicle v1;
-    BOOST_REQUIRE_EQUAL(v1.getOwner(), "none");
-    BOOST_REQUIRE_EQUAL(v1.numCylinders(), 0);
-    BOOST_REQUIRE_EQUAL(v1.getManufacturer(), "none");
-}
-
-BOOST_AUTO_TEST_CASE(testVehicleVALUE)
-{
-    Person p1("Bob");
-    Vehicle v1(p1, 3, "Ford");
-    BOOST_REQUIRE_EQUAL(v1.getOwner(), "Bob");
-    BOOST_REQUIRE_EQUAL(v1.numCylinders(), 3);
-    BOOST_REQUIRE_EQUAL(v1.getManufacturer(), "Ford");
-}
-
-BOOST_AUTO_TEST_CASE(testVehicleCOPY)
-{
-    Person p1("Bob");
-    Vehicle v1(p1, 3, "Ford");
+    Person p("Fuli");
+    Vehicle v1(p, 6, "Ford");
     Vehicle v2(v1);
-    BOOST_REQUIRE_EQUAL(v2.getOwner(), v1.getOwner());
-    BOOST_REQUIRE_EQUAL(v2.numCylinders(), v1.numCylinders());
-    BOOST_REQUIRE_EQUAL(v2.getManufacturer(), v1.getManufacturer());
+
+    BOOST_REQUIRE_EQUAL(v2.getOwner().getName(), "Fuli");
+    BOOST_REQUIRE_EQUAL(v2.getNumCylinders(), 6);
+    BOOST_REQUIRE_EQUAL(v2.getManufacturer(), "Ford");
 }
 
-BOOST_AUTO_TEST_CASE(testVehicleGETTER)
+BOOST_AUTO_TEST_CASE(testVehicleAssign)
 {
-    Vehicle v1;
-    v1.getOwner();
-    v1.numCylinders();
-    v1.getManufacturer();
+    Person p("Eve");
+    Vehicle v1(p, 8, "Honda");
+    Vehicle v2;
+    v2 = v1;
+
+    BOOST_REQUIRE_EQUAL(v2.getOwner().getName(), "Eve");
+    BOOST_REQUIRE_EQUAL(v2.getNumCylinders(), 8);
+    BOOST_REQUIRE_EQUAL(v2.getManufacturer(), "Honda");
 }
 
 BOOST_AUTO_TEST_CASE(testVehicleInsertion)
 {
-    string owner;
-    string manufacturer;
-    int cylinders;
-    cout << "What's your name: ";
-    getline(cin, owner);
-    Person p1(owner);
+    Person p("Frank");
+    Vehicle v(p, 3, "Nissan");
+    ostringstream out;
+    out << v;
+    BOOST_TEST_MESSAGE("Vehicle output: " << out.str());
+    BOOST_REQUIRE(out.str().find("Frank") != string::npos);
+    BOOST_REQUIRE(out.str().find("Nissan") != string::npos);
+}
 
-    cout << "How many cylinders does your engine have: ";
-    cin >> cylinders;
+// ===== Truck Tests =====
 
-    cout << "What is your vehicle's manufacturer: ";
-    cin >> manufacturer;
-    Vehicle v1(p1, cylinders, manufacturer);
-    cout << v1 << endl;
+BOOST_AUTO_TEST_CASE(testTruckDefault)
+{
+    Truck t;
+    BOOST_REQUIRE_EQUAL(t.getOwner().getName(), "none");
+    BOOST_REQUIRE_EQUAL(t.getNumCylinders(), 0);
+    BOOST_REQUIRE_EQUAL(t.getManufacturer(), "none");
+    BOOST_REQUIRE_EQUAL(t.getLoadCapacity(), 0.0);
+    BOOST_REQUIRE_EQUAL(t.getTowingCapacity(), 0);
+}
+
+BOOST_AUTO_TEST_CASE(testTruckValue)
+{
+    Person p("Nous");
+    Vehicle v(p, 6, "Ford");
+    Truck t(v, 2500.5, 9000);
+
+    BOOST_REQUIRE_EQUAL(t.getOwner().getName(), "Nous");
+    BOOST_REQUIRE_EQUAL(t.getNumCylinders(), 6);
+    BOOST_REQUIRE_EQUAL(t.getManufacturer(), "Ford");
+    BOOST_REQUIRE_EQUAL(t.getLoadCapacity(), 2500.5);
+    BOOST_REQUIRE_EQUAL(t.getTowingCapacity(), 9000);
+}
+
+BOOST_AUTO_TEST_CASE(testTruckCopy)
+{
+    Person p("Aha");
+    Vehicle v(p, 8, "Chevy");
+    Truck t1(v, 3000.0, 10000);
+    Truck t2(t1);
+
+    BOOST_REQUIRE_EQUAL(t2.getLoadCapacity(), 3000.0);
+    BOOST_REQUIRE_EQUAL(t2.getTowingCapacity(), 10000);
+}
+
+BOOST_AUTO_TEST_CASE(testTruckAssign)
+{
+    Person p("Tazzyroth");
+    Vehicle v(p, 6, "Ram");
+    Truck t1(v, 1500.0, 5000);
+    Truck t2;
+    t2 = t1;
+
+    BOOST_REQUIRE_EQUAL(t2.getLoadCapacity(), 1500.0);
+    BOOST_REQUIRE_EQUAL(t2.getTowingCapacity(), 5000);
+}
+
+BOOST_AUTO_TEST_CASE(testTruckInsertion)
+{
+    Person p("HooH");
+    Vehicle v(p, 4, "GMC");
+    Truck t(v, 2000.0, 6000);
+    ostringstream out;
+    out << t;
+    BOOST_TEST_MESSAGE("Truck output: " << out.str());
+    BOOST_REQUIRE(out.str().find("HooH") != string::npos);
+    BOOST_REQUIRE(out.str().find("GMC") != string::npos);
 }
