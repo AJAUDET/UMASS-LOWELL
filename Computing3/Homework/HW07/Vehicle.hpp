@@ -2,7 +2,6 @@
 #include <string>
 #include <iostream>
 #include "Person.hpp"
-using namespace std;
 
 class Vehicle : public Person {
  public:
