@@ -33,6 +33,7 @@ using std::cout,
     std::endl;
 
 int main(void) {
+    srand(static_cast<unsigned>(time(nullptr)));
     cout << "Welcome to the Ultimate Guessing Game!" << endl;
     HumanPlayer human;
     ComputerPlayer computer;

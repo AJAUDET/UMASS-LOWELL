@@ -7,14 +7,13 @@ using std::cout,
     std::cin;
 
 int HumanPlayer::getGuess() {
-    cout << "Enter guess (0-100): ";
+    cout << "enter guess (0-100): ";
     cin >> guess;
     return guess;
 }
 
 ComputerPlayer::ComputerPlayer()
 {
-    srand(static_cast<unsigned>(time(nullptr)));
     low = 0;
     high = 100;
     prevGuess = -1;
@@ -22,7 +21,7 @@ ComputerPlayer::ComputerPlayer()
 
 int ComputerPlayer::getGuess() {
     prevGuess = (low + high) / 2;
-    cout << "The computer guesses: " << prevGuess << endl;
+    cout << "the computer guesses: " << prevGuess << '\n';
     return prevGuess;
 }
 

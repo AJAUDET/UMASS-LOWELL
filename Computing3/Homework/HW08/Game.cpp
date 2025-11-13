@@ -25,14 +25,13 @@ bool checkForWin(int guess, int answer) {
 
 // The play function takes as input two Player objects.
 void play(Player &player1, Player &player2) {
-    srand(static_cast<unsigned>(time(nullptr)));
-    int answer = 0, guess1 = 0;
+    int answer = 0;
     answer = (rand() % 100) + 1;
     bool win = false;
 
     while (!win){
-        cout << "Player 1's turn to guess." << endl;
-        guess1 = player1.getGuess();
+        cout << "player 1's turn to guess." << endl;
+        int guess1 = player1.getGuess();
         win = checkForWin(guess1, answer);
         if (win) return;
 
@@ -40,7 +39,7 @@ void play(Player &player1, Player &player2) {
             c1->feedback(guess1 > answer, guess1 < answer);
         }
 
-        cout << "Player 2's turn to guess." << endl;
+        cout << "player 2's turn to guess." << endl;
         int guess2 = player2.getGuess();
         win = checkForWin(guess2, answer);
 
