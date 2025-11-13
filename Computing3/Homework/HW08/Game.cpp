@@ -1,21 +1,14 @@
 #include "Game.hpp"
-#include "Player.hpp"
-
-#include <ctime>
 #include <iostream>
 #include <cstdlib>
-using std::cout,
-    std::endl,
-    std::cin;
+using std::cout;
+using std::endl;
 
-//////////////////////////////////////
-// Global functions given in the project
-//////////////////////////////////////
 bool checkForWin(int guess, int answer) {
-    if (answer == guess) {
+    if (guess == answer) {
         cout << "You're right! You win!" << endl;
         return true;
-    } else if (answer < guess) {
+    } else if (guess > answer) {
         cout << "Your guess is too high." << endl;
     } else {
         cout << "Your guess is too low." << endl;
@@ -23,28 +16,24 @@ bool checkForWin(int guess, int answer) {
     return false;
 }
 
-// The play function takes as input two Player objects.
 void play(Player &player1, Player &player2) {
-    int answer = 0;
-    answer = (rand() % 100) + 1;
+    int answer = (rand() % 100) + 1;
     bool win = false;
 
-    while (!win){
+    while (!win) {
         cout << "player 1's turn to guess." << endl;
         int guess1 = player1.getGuess();
         win = checkForWin(guess1, answer);
         if (win) return;
 
-        if (ComputerPlayer* c1 = dynamic_cast<ComputerPlayer*>(&player1)) {
+        if (auto* c1 = dynamic_cast<ComputerPlayer*>(&player1))
             c1->feedback(guess1 > answer, guess1 < answer);
-        }
 
         cout << "player 2's turn to guess." << endl;
         int guess2 = player2.getGuess();
         win = checkForWin(guess2, answer);
 
-        if (ComputerPlayer* c2 = dynamic_cast<ComputerPlayer*>(&player2)) {
+        if (auto* c2 = dynamic_cast<ComputerPlayer*>(&player2))
             c2->feedback(guess2 > answer, guess2 < answer);
-        }
     }
 }
