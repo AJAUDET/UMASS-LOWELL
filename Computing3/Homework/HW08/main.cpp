@@ -1,7 +1,7 @@
 /*
     Author: AJ Audet
-    Date: 11/1/2025
-    Purpose: using inheritance to test the classes Vehicle and Person
+    Date: 11/12/2025
+    Purpose: creating a better number guessing game
     Time Spent: 2 hours
 */
 /*
@@ -21,6 +21,20 @@ I certify that the work submitted with this assignment is mine and was
 generated in a manner consistent with this document, the course
 academic policy on the course website on Blackboard, and the UMass
 Lowell academic code.
-Date:   11/1/2025
+Date:   11/12/2025
 Name:   AJ Audet
 */
+
+#include "Player.hpp"
+#include "Game.hpp"
+
+#include <iostream>
+using namespace std;
+
+int main(void) {
+    cout << "Welcome to the Ultimate Guessing Game!" << endl;
+    HumanPlayer human;
+    ComputerPlayer computer;
+    play(human, computer);
+    return 0;
+}
