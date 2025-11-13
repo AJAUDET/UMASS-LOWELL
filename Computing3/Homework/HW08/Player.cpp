@@ -2,7 +2,9 @@
 
 #include <iostream>
 #include <string>
-using namespace std;
+using std::cout,
+    std::endl,
+    std::cin;
 
 int HumanPlayer::getGuess() {
     cout << "Enter guess (0-100): ";

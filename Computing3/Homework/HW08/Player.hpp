@@ -3,7 +3,7 @@
 class Player {
  public:
   virtual int getGuess() = 0;
-  virtual void feedback(bool tooH, bool tooL) {};
+  virtual void feedback(bool tooH, bool tooL) {}
   virtual ~Player() = default;
 };
 

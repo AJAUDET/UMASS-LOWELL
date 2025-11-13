@@ -29,7 +29,8 @@ Name:   AJ Audet
 #include "Game.hpp"
 
 #include <iostream>
-using namespace std;
+using std::cout,
+    std::endl;
 
 int main(void) {
     cout << "Welcome to the Ultimate Guessing Game!" << endl;

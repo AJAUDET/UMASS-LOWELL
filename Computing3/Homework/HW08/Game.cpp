@@ -4,6 +4,9 @@
 #include <ctime>
 #include <iostream>
 #include <cstdlib>
+using std::cout,
+    std::endl,
+    std::cin;
 
 //////////////////////////////////////
 // Global functions given in the project
@@ -44,6 +47,5 @@ void play(Player &player1, Player &player2) {
         if (ComputerPlayer* c2 = dynamic_cast<ComputerPlayer*>(&player2)) {
             c2->feedback(guess2 > answer, guess2 < answer);
         }
-
     }
 }
