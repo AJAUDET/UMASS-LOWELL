@@ -1,0 +1,40 @@
+[ ca ]
+default_ca = CA_default
+
+[ CA_default ]
+new_certs_dir = .
+database = ./index.txt
+serial = ./serial
+default_md = sha256
+policy = policy_strict
+
+[ policy_strict ]
+countryName             = optional
+stateOrProvinceName     = optional
+localityName            = optional
+organizationName        = optional
+organizationalUnitName  = optional
+commonName              = supplied
+emailAddress            = optional
+
+[ req ]
+default_bits        = 4096
+distinguished_name  = req_distinguished_name
+x509_extensions     = v3_ca
+
+[ req_distinguished_name ]
+commonName                  = Common Name
+
+[ v3_ca ]
+basicConstraints = critical, CA:TRUE
+keyUsage = critical, keyCertSign, cRLSign
+subjectKeyIdentifier = hash
+
+[ v3_server ]
+basicConstraints = CA:FALSE
+keyUsage = digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = localhost
