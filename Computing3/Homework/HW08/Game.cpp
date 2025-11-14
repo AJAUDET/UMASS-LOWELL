@@ -21,16 +21,18 @@ void play(Player &player1, Player &player2) {
     bool win = false;
 
     while (!win) {
-        cout << "player 1's turn to guess." << endl;
+        cout << "Player 1's turn to guess. ";
         int guess1 = player1.getGuess();
+        cout << "\n";
         win = checkForWin(guess1, answer);
         if (win) return;
 
         if (auto* c1 = dynamic_cast<ComputerPlayer*>(&player1))
             c1->feedback(guess1 > answer, guess1 < answer);
 
-        cout << "player 2's turn to guess. ";
+        cout << "Player 2's turn to guess. ";
         int guess2 = player2.getGuess();
+        cout << "\n";
         win = checkForWin(guess2, answer);
 
         if (auto* c2 = dynamic_cast<ComputerPlayer*>(&player2))
