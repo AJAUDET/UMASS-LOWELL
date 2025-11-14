@@ -1,16 +1,18 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 // using declarations
-using std::ostream;
 using std::cout;
 using std::endl;
+using std::ostream;
 using std::string;
-
+using std::vector;
 
 class PayKind { // base class - no member variables
 	public:
 		void output(ostream& out) const { out << *this; }
+		virtual double payAdvice() const = 0;
 				
 	friend ostream& operator<< (ostream&, const PayKind&);
 };
@@ -27,7 +29,11 @@ class PerCourse : public PayKind {
 		PerCourse(unsigned fee) : _feePerCourse(fee) {};
 		~PerCourse() { cout << "PerCourse destructor called\n"; }
 
-		unsigned getFeePerCourse() const { return _feePerCourse; };
+		unsigned getFeePerCourse() const { return _feePerCourse; }
+		double payAdvice() const override {
+			return static_cast<double>(_feePerCourse) / 7;
+		}
+
 		void output(ostream &out) const { out << *this; }
 
 		friend ostream& operator<< (ostream&, const PerCourse&);
@@ -42,6 +48,9 @@ class Salaried : public PayKind { // derived class
 	
 		// accessor functions
 		unsigned getSalary() const { return _annualSalary; }
+		double payAdvice() const override {
+			return static_cast<double>(_annualSalary) / 26;
+		}
 		
 		void output(ostream& out) const { out << *this; }
 				
@@ -61,6 +70,10 @@ class Hourly : public PayKind { // derived class
 	
 		// accessor functions
 		unsigned getHourlyRate() const { return _hourlyRate; }
+
+		double payAdvice() const override {
+			return static_cast<double>(_hourlyRate) * 40;
+		}
 		
 		void output(ostream& out) const { out << *this; }
 				
@@ -549,19 +562,42 @@ int main (void) {
 	
 	Grader g1("John", "Doe", "89 Canal Street", 54329876, 3.5, "CS", "Tom Wilkes", "junior",
 			  "COMP.2010", 25.00, 20);
-	cout << "Grader g1(John...):\n" << g1 << endl;
-	
+	cout << "Grader g1(John...):\n" << g1;
+	cout << "Pay Advice: " << g1.payAdvice() << endl;
+
 	Grader g2(g1); // invoke copy constructor
 	cout << "Grader g2(copy of g1 - John...):\n" << g2 << endl;
 	
 	NTT n1("Tom", "Wilkes", "Foo Street", 52901256, "123-45-6789", "Computer Science", "Assistant Teaching Professor", 12345);
-	cout << "NTT Faculty n1(Tom...):\n" << n1 << endl;
+	cout << "NTT Faculty n1(Tom...):\n" << n1;
+	cout << "Pay Advice is " << n1.payAdvice() << endl << endl;
 
 	Adjunct a;
 	cout << "Adjunct():\n" << a << endl;
 
     Adjunct a2("Jane", "Doe", "Adjunct Lane", 98765432, "999-88-7777", "English", 3000, 18, 2);
-    cout << "Adjunct Faculty a2(Jane...):\n" << a2 << endl;
+    cout << "Adjunct Faculty a2(Jane...):\n" << a2;
+	cout << "Pay Advice is " << a2.payAdvice() << endl;
+
+	vector<NTT*> nv;
+	nv.push_back(&n1);
+	
+	cout << 0 << ":\n" << *nv[0];
+	cout << "Pay Advice is " << nv[0]->payAdvice() << endl << endl;
+
+	vector<UMLPerson*> uv;
+	uv.push_back(&s1);
+	uv.push_back(&s2);
+	uv.push_back(&g1);
+	uv.push_back(&n1);
+
+	// improving for loop
+	// 	 - Follow the stringify() pattern with each function adding what makes them unique to the output
+	// 	 	 - stringify() {return Grader::stringify + "Pay Advide:\t " + payAdvide(); }
+	for (int i = 0; i < 4; i++) {
+		cout << i << ":\n" << *uv[i] << endl;
+	}
+	cout << endl;
 
 	return 0;
 }
