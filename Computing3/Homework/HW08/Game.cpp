@@ -29,7 +29,7 @@ void play(Player &player1, Player &player2) {
         if (auto* c1 = dynamic_cast<ComputerPlayer*>(&player1))
             c1->feedback(guess1 > answer, guess1 < answer);
 
-        cout << "player 2's turn to guess." << endl;
+        cout << "player 2's turn to guess. ";
         int guess2 = player2.getGuess();
         win = checkForWin(guess2, answer);
 
