@@ -2,7 +2,7 @@
     Author: AJ Audet
     Date: 11/12/2025
     Purpose: creating a better number guessing game
-    Time Spent: 2 hours
+    Time Spent: 2 hours, 3 hours debugging
 */
 /*
 Computing III -- COMP.2010 Honor Statement
@@ -25,16 +25,12 @@ Date:   11/12/2025
 Name:   AJ Audet
 */
 
-#include "Player.hpp"
 #include "Game.hpp"
 
 #include <iostream>
-using std::cout,
-    std::endl;
 
 int main(void) {
     srand(static_cast<unsigned>(time(nullptr)));
-    cout << "Welcome to the Ultimate Guessing Game!" << endl;
     HumanPlayer human;
     ComputerPlayer computer;
     play(human, computer);
