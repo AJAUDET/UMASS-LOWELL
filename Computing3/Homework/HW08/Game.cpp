@@ -1,6 +1,7 @@
-#include "Game.hpp"
 #include <iostream>
 #include <cstdlib>
+#include "Game.hpp"
+
 using std::cout;
 using std::endl;
 

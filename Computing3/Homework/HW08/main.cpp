@@ -25,9 +25,8 @@ Date:   11/12/2025
 Name:   AJ Audet
 */
 
-#include "Game.hpp"
-
 #include <iostream>
+#include "Game.hpp"
 
 int main(void) {
     srand(static_cast<unsigned>(time(nullptr)));
