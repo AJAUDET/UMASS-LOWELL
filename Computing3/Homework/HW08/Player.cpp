@@ -14,7 +14,7 @@ ComputerPlayer::ComputerPlayer() {
 
 int ComputerPlayer::getGuess() {
     prevGuess = (low + high) / 2;
-    std::cout << "The computer guesses: " << prevGuess << '\n';
+    std::cout << "The computer guesses " << prevGuess << '\n';
     return prevGuess;
 }
 
