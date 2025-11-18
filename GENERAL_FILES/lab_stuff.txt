@@ -30,3 +30,5 @@ realpath : use to get current directory from both remote machine and personal ma
 /Users/hazelaudet/Downloads
 
 /home/undergrad/2028/aaudet/
+
+/home/undergrad/2028/aaudet/Assembley
