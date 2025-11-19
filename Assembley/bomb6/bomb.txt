@@ -318,7 +318,7 @@ Disassembly of section .text:
 # test string password 
 0000000000401440 <phase_1>:
   401440:	48 83 ec 08          	sub    $0x8,%rsp
-  401444:	be d8 32 40 00       	mov    $0x4032d8,%esi
+  401444:	be d8 32 40 00       	mov    $0x4032d8,%esi             # string to compare is here
   401449:	e8 65 04 00 00       	call   4018b3 <strings_not_equal>
   40144e:	85 c0                	test   %eax,%eax
   401450:	75 05                	jne    401457 <phase_1+0x17>
@@ -327,6 +327,7 @@ Disassembly of section .text:
   401457:	e8 92 06 00 00       	call   401aee <explode_bomb>
   40145c:	eb f4                	jmp    401452 <phase_1+0x12>
 
+# enter 6 numbers 
 000000000040145e <phase_2>:
   40145e:	55                   	push   %rbp
   40145f:	53                   	push   %rbx
