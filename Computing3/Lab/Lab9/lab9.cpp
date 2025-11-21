@@ -579,6 +579,9 @@ int main (void) {
     cout << "Adjunct Faculty a2(Jane...):\n" << a2;
 	cout << "Pay Advice is " << a2.payAdvice() << endl;
 
+	//	When NTT is swapped to UMLPerson 
+	//		- Cannot access PayKind as it is not a member of the UMLPerson class
+	//
 	vector<NTT*> nv;
 	nv.push_back(&n1);
 	
@@ -594,6 +597,7 @@ int main (void) {
 	// improving for loop
 	// 	 - Follow the stringify() pattern with each function adding what makes them unique to the output
 	// 	 	 - stringify() {return Grader::stringify + "Pay Advide:\t " + payAdvide(); }
+
 	for (int i = 0; i < 4; i++) {
 		cout << i << ":\n" << *uv[i] << endl;
 	}

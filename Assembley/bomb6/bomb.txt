@@ -360,61 +360,63 @@ Disassembly of section .text:
   4014be:	5d                   	pop    %rbp
   4014bf:	c3                   	ret
 
+# read two numbers from keyboard and compare them to ones in memory
 00000000004014c0 <phase_3>:
   4014c0:	48 83 ec 18          	sub    $0x18,%rsp
-  4014c4:	48 8d 4c 24 08       	lea    0x8(%rsp),%rcx
-  4014c9:	48 8d 54 24 0c       	lea    0xc(%rsp),%rdx
+  4014c4:	48 8d 4c 24 08       	lea    0x8(%rsp),%rcx           # num1
+  4014c9:	48 8d 54 24 0c       	lea    0xc(%rsp),%rdx           # num2
   4014ce:	be 1f 31 40 00       	mov    $0x40311f,%esi
   4014d3:	b8 00 00 00 00       	mov    $0x0,%eax
-  4014d8:	e8 73 fc ff ff       	call   401150 <__isoc99_sscanf@plt>
-  4014dd:	83 f8 01             	cmp    $0x1,%eax
+  4014d8:	e8 73 fc ff ff       	call   401150 <__isoc99_sscanf@plt>     inp_vals = scanf("%d %d", &num1, &num2)
+  4014dd:	83 f8 01             	cmp    $0x1,%eax                 if (inp_vals < 1)
   4014e0:	7e 12                	jle    4014f4 <phase_3+0x34>
-  4014e2:	83 7c 24 0c 07       	cmpl   $0x7,0xc(%rsp)
+  4014e2:	83 7c 24 0c 07       	cmpl   $0x7,0xc(%rsp)             # if (n > 7) explode_bomb();
   4014e7:	77 4c                	ja     401535 <phase_3+0x75>
   4014e9:	8b 44 24 0c          	mov    0xc(%rsp),%eax
   4014ed:	ff 24 c5 b0 35 40 00 	jmp    *0x4035b0(,%rax,8)
   4014f4:	e8 f5 05 00 00       	call   401aee <explode_bomb>
-  4014f9:	eb e7                	jmp    4014e2 <phase_3+0x22>
-  4014fb:	b8 ba 03 00 00       	mov    $0x3ba,%eax
-  401500:	39 44 24 08          	cmp    %eax,0x8(%rsp)
-  401504:	75 42                	jne    401548 <phase_3+0x88>
+  4014f9:	eb e7                	jmp    4014e2 <phase_3+0x22>    case 0
+  4014fb:	b8 ba 03 00 00       	mov    $0x3ba,%eax              # expected = 0x3ba // 954
+  401500:	39 44 24 08          	cmp    %eax,0x8(%rsp)           if (num2 != expected)
+  401504:	75 42                	jne    401548 <phase_3+0x88>        explode_bomb()
   401506:	48 83 c4 18          	add    $0x18,%rsp
-  40150a:	c3                   	ret
-  40150b:	b8 34 01 00 00       	mov    $0x134,%eax
-  401510:	eb ee                	jmp    401500 <phase_3+0x40>
-  401512:	b8 b0 01 00 00       	mov    $0x1b0,%eax
-  401517:	eb e7                	jmp    401500 <phase_3+0x40>
-  401519:	b8 c9 01 00 00       	mov    $0x1c9,%eax
-  40151e:	eb e0                	jmp    401500 <phase_3+0x40>
-  401520:	b8 81 01 00 00       	mov    $0x181,%eax
-  401525:	eb d9                	jmp    401500 <phase_3+0x40>
-  401527:	b8 f9 00 00 00       	mov    $0xf9,%eax
-  40152c:	eb d2                	jmp    401500 <phase_3+0x40>
-  40152e:	b8 f1 01 00 00       	mov    $0x1f1,%eax
+  40150a:	c3                   	ret                            case 1
+  40150b:	b8 34 01 00 00       	mov    $0x134,%eax                # expected = 0x134 // 308
+  401510:	eb ee                	jmp    401500 <phase_3+0x40>   case 2
+  401512:	b8 b0 01 00 00       	mov    $0x1b0,%eax                # expected = 0x1b0 // 432
+  401517:	eb e7                	jmp    401500 <phase_3+0x40>   case 3
+  401519:	b8 c9 01 00 00       	mov    $0x1c9,%eax                # expected = 0x1c9 // 457
+  40151e:	eb e0                	jmp    401500 <phase_3+0x40>   case 4
+  401520:	b8 81 01 00 00       	mov    $0x181,%eax                # expected = 0x181 // 385
+  401525:	eb d9                	jmp    401500 <phase_3+0x40>   case 5
+  401527:	b8 f9 00 00 00       	mov    $0xf9,%eax                 # expected = 0xf9  // 249
+  40152c:	eb d2                	jmp    401500 <phase_3+0x40>   case 6
+  40152e:	b8 f1 01 00 00       	mov    $0x1f1,%eax                 # expected = 0x1f1 // 497
   401533:	eb cb                	jmp    401500 <phase_3+0x40>
   401535:	e8 b4 05 00 00       	call   401aee <explode_bomb>
   40153a:	b8 00 00 00 00       	mov    $0x0,%eax
-  40153f:	eb bf                	jmp    401500 <phase_3+0x40>
-  401541:	b8 22 01 00 00       	mov    $0x122,%eax
-  401546:	eb b8                	jmp    401500 <phase_3+0x40>
-  401548:	e8 a1 05 00 00       	call   401aee <explode_bomb>
+  40153f:	eb bf                	jmp    401500 <phase_3+0x40>   case 7
+  401541:	b8 22 01 00 00       	mov    $0x122,%eax                  # expected = 0x122 // 290
+  401546:	eb b8                	jmp    401500 <phase_3+0x40>   default
+  401548:	e8 a1 05 00 00       	call   401aee <explode_bomb>        explode_bomb()
   40154d:	eb b7                	jmp    401506 <phase_3+0x46>
 
-000000000040154f <func4>:
+# there are 3 input values here, x = target_val, min, max
+000000000040154f <func4>: 
   40154f:	53                   	push   %rbx
   401550:	89 d0                	mov    %edx,%eax
   401552:	29 f0                	sub    %esi,%eax
   401554:	89 c3                	mov    %eax,%ebx
   401556:	c1 eb 1f             	shr    $0x1f,%ebx
   401559:	01 c3                	add    %eax,%ebx
-  40155b:	d1 fb                	sar    $1,%ebx
-  40155d:	01 f3                	add    %esi,%ebx
-  40155f:	39 fb                	cmp    %edi,%ebx
-  401561:	7f 06                	jg     401569 <func4+0x1a>
-  401563:	7c 10                	jl     401575 <func4+0x26>
+  40155b:	d1 fb                	sar    $1,%ebx        # right shift ebx by 1 // ie div by 2
+  40155d:	01 f3                	add    %esi,%ebx      #  mid = (min + max)
+  40155f:	39 fb                	cmp    %edi,%ebx              comp(mid, x)
+  401561:	7f 06                	jg     401569 <func4+0x1a>          return mid + func4(x, min, mid - 1)
+  401563:	7c 10                	jl     401575 <func4+0x26>          return mid + func4(x, mid + 1, max)
   401565:	89 d8                	mov    %ebx,%eax
   401567:	5b                   	pop    %rbx
-  401568:	c3                   	ret
+  401568:	c3                   	ret                                 return mid
   401569:	8d 53 ff             	lea    -0x1(%rbx),%edx
   40156c:	e8 de ff ff ff       	call   40154f <func4>
   401571:	01 c3                	add    %eax,%ebx
@@ -424,26 +426,30 @@ Disassembly of section .text:
   40157d:	01 c3                	add    %eax,%ebx
   40157f:	eb e4                	jmp    401565 <func4+0x16>
 
+# there are 2 input values here
 0000000000401581 <phase_4>:
   401581:	48 83 ec 18          	sub    $0x18,%rsp
-  401585:	48 8d 4c 24 08       	lea    0x8(%rsp),%rcx
-  40158a:	48 8d 54 24 0c       	lea    0xc(%rsp),%rdx
-  40158f:	be 1f 31 40 00       	mov    $0x40311f,%esi
+  401585:	48 8d 4c 24 08       	lea    0x8(%rsp),%rcx      # num1
+  40158a:	48 8d 54 24 0c       	lea    0xc(%rsp),%rdx      # num2
+  40158f:	be 1f 31 40 00       	mov    $0x40311f,%esi      
   401594:	b8 00 00 00 00       	mov    $0x0,%eax
-  401599:	e8 b2 fb ff ff       	call   401150 <__isoc99_sscanf@plt>
-  40159e:	83 f8 02             	cmp    $0x2,%eax
-  4015a1:	75 07                	jne    4015aa <phase_4+0x29>
+  401599:	e8 b2 fb ff ff       	call   401150 <__isoc99_sscanf@plt> inp_vals = scanf("%d %d", &num1, &num2)
+  40159e:	83 f8 02             	cmp    $0x2,%eax                     if (inp_vals != 2)
+  4015a1:	75 07                	jne    4015aa <phase_4+0x29>              explode_bomb
   4015a3:	83 7c 24 0c 0e       	cmpl   $0xe,0xc(%rsp)
   4015a8:	76 05                	jbe    4015af <phase_4+0x2e>
   4015aa:	e8 3f 05 00 00       	call   401aee <explode_bomb>
-  4015af:	ba 0e 00 00 00       	mov    $0xe,%edx
-  4015b4:	be 00 00 00 00       	mov    $0x0,%esi
-  4015b9:	8b 7c 24 0c          	mov    0xc(%rsp),%edi
-  4015bd:	e8 8d ff ff ff       	call   40154f <func4>
-  4015c2:	83 f8 0a             	cmp    $0xa,%eax
-  4015c5:	75 07                	jne    4015ce <phase_4+0x4d>
-  4015c7:	83 7c 24 08 0a       	cmpl   $0xa,0x8(%rsp)
-  4015cc:	74 05                	je     4015d3 <phase_4+0x52>
+
+  4015af:	ba 0e 00 00 00       	mov    $0xe,%edx                    %edx = 14
+  4015b4:	be 00 00 00 00       	mov    $0x0,%esi                    %esi = 0
+  4015b9:	8b 7c 24 0c          	mov    0xc(%rsp),%edi               %num2 = x 
+  4015bd:	e8 8d ff ff ff       	call   40154f <func4>               int result = func4(x, %esi, %edx)
+
+  4015c2:	83 f8 0a             	cmp    $0xa,%eax                    if (result != 10)
+  4015c5:	75 07                	jne    4015ce <phase_4+0x4d>            explode_bomb()
+
+  4015c7:	83 7c 24 08 0a       	cmpl   $0xa,0x8(%rsp)               if (num2 != 10)
+  4015cc:	74 05                	je     4015d3 <phase_4+0x52>            explode_bomb()
   4015ce:	e8 1b 05 00 00       	call   401aee <explode_bomb>
   4015d3:	48 83 c4 18          	add    $0x18,%rsp
   4015d7:	c3                   	ret
