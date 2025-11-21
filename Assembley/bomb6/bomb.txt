@@ -318,10 +318,10 @@ Disassembly of section .text:
 # test string password 
 0000000000401440 <phase_1>:
   401440:	48 83 ec 08          	sub    $0x8,%rsp
-  401444:	be d8 32 40 00       	mov    $0x4032d8,%esi             # string to compare is here
+  401444:	be d8 32 40 00       	mov    $0x4032d8,%esi                # string to compare is here: "When a problem comes along, you must zip it!"
   401449:	e8 65 04 00 00       	call   4018b3 <strings_not_equal>
-  40144e:	85 c0                	test   %eax,%eax
-  401450:	75 05                	jne    401457 <phase_1+0x17>
+  40144e:	85 c0                	test   %eax,%eax                     # if (inp_string != %esi)
+  401450:	75 05                	jne    401457 <phase_1+0x17>              explode_bomb()
   401452:	48 83 c4 08          	add    $0x8,%rsp
   401456:	c3                   	ret
   401457:	e8 92 06 00 00       	call   401aee <explode_bomb>
@@ -331,11 +331,13 @@ Disassembly of section .text:
 000000000040145e <phase_2>:
   40145e:	55                   	push   %rbp
   40145f:	53                   	push   %rbx
-  401460:	48 83 ec 28          	sub    $0x28,%rsp
-  401464:	48 89 e6             	mov    %rsp,%rsi
-  401467:	e8 b8 06 00 00       	call   401b24 <read_six_numbers>
-  40146c:	83 3c 24 01          	cmpl   $0x1,(%rsp)    
-  401470:	75 0a                	jne    40147c <phase_2+0x1e>
+  401460:	48 83 ec 28          	sub    $0x28,%rsp                   # int nums[6]
+  401464:	48 89 e6             	mov    %rsp,%rsi                    # input
+  401467:	e8 b8 06 00 00       	call   401b24 <read_six_numbers>    # read_six_numbers(input, nums)
+
+  40146c:	83 3c 24 01          	cmpl   $0x1,(%rsp)                  if (nums[0] != 1)
+  401470:	75 0a                	jne    40147c <phase_2+0x1e>            explode_bomb()
+
   401472:	48 89 e3             	mov    %rsp,%rbx
   401475:	48 8d 6c 24 14       	lea    0x14(%rsp),%rbp
   40147a:	eb 2d                	jmp    4014a9 <phase_2+0x4b>
@@ -440,10 +442,10 @@ Disassembly of section .text:
   4015a8:	76 05                	jbe    4015af <phase_4+0x2e>
   4015aa:	e8 3f 05 00 00       	call   401aee <explode_bomb>
 
-  4015af:	ba 0e 00 00 00       	mov    $0xe,%edx                    %edx = 14
-  4015b4:	be 00 00 00 00       	mov    $0x0,%esi                    %esi = 0
-  4015b9:	8b 7c 24 0c          	mov    0xc(%rsp),%edi               %num2 = x 
-  4015bd:	e8 8d ff ff ff       	call   40154f <func4>               int result = func4(x, %esi, %edx)
+  4015af:	ba 0e 00 00 00       	mov    $0xe,%edx                    max = 14
+  4015b4:	be 00 00 00 00       	mov    $0x0,%esi                    min = 0
+  4015b9:	8b 7c 24 0c          	mov    0xc(%rsp),%edi               target = num2 
+  4015bd:	e8 8d ff ff ff       	call   40154f <func4>               int result = func4(target, min, max)
 
   4015c2:	83 f8 0a             	cmp    $0xa,%eax                    if (result != 10)
   4015c5:	75 07                	jne    4015ce <phase_4+0x4d>            explode_bomb()
@@ -852,7 +854,7 @@ Disassembly of section .text:
   401b1f:	e8 7c f6 ff ff       	call   4011a0 <exit@plt>
 
 0000000000401b24 <read_six_numbers>:
-  401b24:	48 83 ec 08          	sub    $0x8,%rsp
+  401b24:	48 83 ec 08          	sub    $0x8,%rsp                        # read_six_numbers(const char *input, int *arr)
   401b28:	48 89 f2             	mov    %rsi,%rdx
   401b2b:	48 8d 4e 04          	lea    0x4(%rsi),%rcx
   401b2f:	48 8d 46 14          	lea    0x14(%rsi),%rax
@@ -863,10 +865,10 @@ Disassembly of section .text:
   401b3d:	4c 8d 46 08          	lea    0x8(%rsi),%r8
   401b41:	be 13 31 40 00       	mov    $0x403113,%esi
   401b46:	b8 00 00 00 00       	mov    $0x0,%eax
-  401b4b:	e8 00 f6 ff ff       	call   401150 <__isoc99_sscanf@plt>
+  401b4b:	e8 00 f6 ff ff       	call   401150 <__isoc99_sscanf@plt>       # int n = scanf("%d %d %d %d %d %d", num[0], num[1], num[2], num[3], num[4], num[5]);
   401b50:	48 83 c4 10          	add    $0x10,%rsp
-  401b54:	83 f8 05             	cmp    $0x5,%eax
-  401b57:	7e 05                	jle    401b5e <read_six_numbers+0x3a>
+  401b54:	83 f8 05             	cmp    $0x5,%eax                          # if (n <= 5)
+  401b57:	7e 05                	jle    401b5e <read_six_numbers+0x3a>         explode_bomb()
   401b59:	48 83 c4 08          	add    $0x8,%rsp
   401b5d:	c3                   	ret
   401b5e:	e8 8b ff ff ff       	call   401aee <explode_bomb>
