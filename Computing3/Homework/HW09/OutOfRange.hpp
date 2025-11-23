@@ -1,7 +1,9 @@
+#pragma once
+
 #include <limits>
 #include <string>
 #include <iostream>
-using namespace std;
+using std::string;
 
 class OutOfRange {
  private:

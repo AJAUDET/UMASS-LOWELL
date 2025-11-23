@@ -29,6 +29,7 @@ Name:   AJ Audet
 #include <boost/test/included/unit_test.hpp>
 
 #include "PFArrayD.hpp"
+#include "OutOfRange.hpp"
 
 BOOST_AUTO_TEST_CASE(test_default_constructor) {
     PFArrayD arr;

@@ -1,19 +1,36 @@
 #include "PFArrayD.hpp"
+using namespace std;
 
-PFArrayD::PFArrayD(): capacity(50), used(0) {
+PFArrayD::PFArrayD() : capacity(50), used(0) {
     a = new double[capacity];
 }
 
-PFArrayD::PFArrayD(int capacity) : capacity(capacity), used(0) {
+PFArrayD::PFArrayD(int cap) : capacity(cap), used(0) {
+    if (cap <= 0) throw OutOfRange(cap, "capacity must be > 0");
     a = new double[capacity];
 }
 
-PFArrayD::PFArrayD(const PFArrayD& obj): capacity(obj.capacity), used(obj.used)
+PFArrayD::PFArrayD(const PFArrayD& obj)
+    : capacity(obj.capacity), used(obj.used)
 {
     a = new double[capacity];
-    for (int i = 0; i < used; i++) {
+    for (int i = 0; i < used; i++)
         a[i] = obj.a[i];
-    }
+}
+
+PFArrayD& PFArrayD::operator=(const PFArrayD& rhs) {
+    if (this == &rhs) return *this;
+
+    delete[] a;
+
+    capacity = rhs.capacity;
+    used = rhs.used;
+
+    a = new double[capacity];
+    for (int i = 0; i < used; ++i)
+        a[i] = rhs.a[i];
+
+    return *this;
 }
 
 PFArrayD::~PFArrayD() {
@@ -21,37 +38,17 @@ PFArrayD::~PFArrayD() {
 }
 
 void PFArrayD::addElement(double element) {
-    if (isFull()) {
-        throw OutOfRange(used, "Insertion exceeds PFArrayD capacity");
-    }
+    if (used >= capacity)
+        throw OutOfRange(used, "addElement: array full");
+
     a[used++] = element;
 }
 
 double& PFArrayD::operator[](int index) {
-    if (index < 0 || index >= used) {
-        throw OutOfRange(index, "Index out of range in PFArrayD");
-    }
+    if (index < 0 || index >= used)
+        throw OutOfRange(index, "operator[]: index out of bounds");
+
     return a[index];
-}
-
-PFArrayD& PFArrayD::operator=(const PFArrayD& rightSide) {
-    if (this == &rightSide)
-        return *this;
-
-    // Release old memory
-    delete[] a;
-
-    // Copy metadata
-    capacity = rightSide.capacity;
-    used = rightSide.used;
-
-    // Allocate new memory + copy elements
-    a = new double[capacity];
-    for (int i = 0; i < used; i++) {
-        a[i] = rightSide.a[i];
-    }
-
-    return *this;
 }
 
 void testException() {
