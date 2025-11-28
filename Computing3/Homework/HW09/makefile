@@ -1,10 +1,10 @@
 CXX = g++
-CXXFLAGS = -std=c++20 -Wall -Werror -pedantic -g
+CXXFLAGS = -std=c++20 -Wall -Werror -pedantic -g -I"C:/boost/boost_1_89_0"
 
 all: test
 
 test: PFArrayD.o test.o
-	$(CXX) $(CXXFLAGS) PFArrayD.o test.o -o test -lboost_unit_test_framework
+	$(CXX) $(CXXFLAGS) PFArrayD.o test.o -o test
 
 PFArrayD.o: PFArrayD.cpp PFArrayD.hpp OutOfRange.hpp
 	$(CXX) $(CXXFLAGS) -c PFArrayD.cpp

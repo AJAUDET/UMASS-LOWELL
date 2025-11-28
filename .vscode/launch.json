@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/workspaces/UMASS-LOWELL/Computing3/Homework/LinkedList",
-      "program": "/workspaces/UMASS-LOWELL/Computing3/Homework/LinkedList/build/Debug/outDebug",
+      "cwd": "/workspaces/UMASS-LOWELL",
+      "program": "/workspaces/UMASS-LOWELL",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
