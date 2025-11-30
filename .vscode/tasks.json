@@ -1,0 +1,27 @@
+        {
+            "version": "2.0.0",
+            "tasks": [
+                {
+                    "label": "build",
+                    "type": "shell",
+                    "command": "g++",
+                    "args": [
+                        "${file}",
+                        "-o",
+                        "${fileDirname}/${fileBasenameNoExtension}.exe",
+                        "-I",
+                        "C:/boost/include/boost-1_84_0", // Replace with your Boost include path
+                        "-L",
+                        "C:/boost/lib", // Replace with your Boost library path
+                        "-lboost_unit_test_framework" // Example for Boost.Test library
+                    ],
+                    "group": {
+                        "kind": "build",
+                        "isDefault": true
+                    },
+                    "problemMatcher": [
+                        "$gcc"
+                    ]
+                }
+            ]
+        }
