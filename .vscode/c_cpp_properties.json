@@ -3,9 +3,7 @@
         {
             "name": "windows-gcc-x64",
             "includePath": [
-                "${workspaceFolder}/**",
-                "C:/boost/boost_1_89_0", 
-                "C:/SFML-3.0.2/include"
+                "${workspaceFolder}/**"
             ],
             "cStandard": "${default}",
             "cppStandard": "${default}",
