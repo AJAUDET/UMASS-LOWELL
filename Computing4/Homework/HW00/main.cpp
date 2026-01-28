@@ -1,46 +1,35 @@
-#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
- 
+#include <SFML/Window/Event.hpp>
+#include <SFML/Window/Keyboard.hpp>
+#include <optional>
+
 int main()
 {
-    // Create the main window
-    sf::RenderWindow window(sf::VideoMode({800, 600}), "SFML window");
- 
-    // Load a sprite to display
-    const sf::Texture texture("cute_image.jpg");
-    sf::Sprite sprite(texture);
- 
-    // Create a graphical text to display
-    const sf::Font font("arial.ttf");
-    sf::Text text(font, "Hello SFML", 50);
- 
-    // Load a music to play
-    sf::Music music("nice_music.ogg");
- 
-    // Play the music
-    music.play();
- 
-    // Start the game loop
+    sf::RenderWindow window(sf::VideoMode({800, 600}), "PS0 - SFML Events");
+    sf::CircleShape shape(100.f);
+    shape.setFillColor(sf::Color::Blue);
+
     while (window.isOpen())
     {
-        // Process events
         while (const std::optional event = window.pollEvent())
         {
-            // Close window: exit
             if (event->is<sf::Event::Closed>())
                 window.close();
         }
- 
-        // Clear screen
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
+            window.close();
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+            shape.move({0.f, -0.1f});
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+            shape.move({0.f, 0.1f});
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+            shape.move({-0.1f, 0.f});
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+            shape.move({0.1f, 0.f});
+
         window.clear();
- 
-        // Draw the sprite
-        window.draw(sprite);
- 
-        // Draw the string
-        window.draw(text);
- 
-        // Update the window
+        window.draw(shape);
         window.display();
     }
 }

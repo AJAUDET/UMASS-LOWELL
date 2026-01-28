@@ -74,5 +74,6 @@
     "vector": "cpp",
     "set": "cpp",
     "iostream": "cpp"
-  }
+  },
+  "cmake.sourceDirectory": "C:/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00"
 }

@@ -7,9 +7,9 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": false,
-      "cwd": "/workspaces/UMASS-LOWELL",
-      "program": "/workspaces/UMASS-LOWELL",
+      "externalConsole": true,
+      "cwd": "c:/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00",
+      "program": "c:/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
