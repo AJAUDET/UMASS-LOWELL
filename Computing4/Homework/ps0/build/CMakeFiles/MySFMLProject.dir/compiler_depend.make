@@ -88,6 +88,7 @@ CMakeFiles/MySFMLProject.dir/main.cpp.o: /c/Users/craba/UMASS-LOWELL/Computing4/
   C:/msys64/mingw64/include/_mingw_stat64.h \
   C:/msys64/mingw64/include/_timeval.h \
   C:/msys64/mingw64/include/assert.h \
+  C:/msys64/mingw64/include/c++/15.2.0/algorithm \
   C:/msys64/mingw64/include/c++/15.2.0/array \
   C:/msys64/mingw64/include/c++/15.2.0/backward/auto_ptr.h \
   C:/msys64/mingw64/include/c++/15.2.0/backward/binders.h \
@@ -157,6 +158,7 @@ CMakeFiles/MySFMLProject.dir/main.cpp.o: /c/Users/craba/UMASS-LOWELL/Computing4/
   C:/msys64/mingw64/include/c++/15.2.0/bits/ptr_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/quoted_string.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/range_access.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algo.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algobase.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_base.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_cmp.h \
@@ -242,6 +244,7 @@ CMakeFiles/MySFMLProject.dir/main.cpp.o: /c/Users/craba/UMASS-LOWELL/Computing4/
   C:/msys64/mingw64/include/c++/15.2.0/optional \
   C:/msys64/mingw64/include/c++/15.2.0/ostream \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/execution_defs.h \
+  C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_algorithm_defs.h \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_memory_defs.h \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/pstl_config.h \
   C:/msys64/mingw64/include/c++/15.2.0/ratio \
@@ -391,6 +394,8 @@ C:/msys64/mingw64/include/c++/15.2.0/vector:
 
 C:/msys64/mingw64/include/c++/15.2.0/variant:
 
+C:/msys64/mingw64/include/c++/15.2.0/utility:
+
 C:/msys64/mingw64/include/c++/15.2.0/bits/hash_bytes.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/functional_hash.h:
@@ -429,15 +434,7 @@ C:/msys64/mingw64/include/c++/15.2.0/bits/max_size_type.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/ext/alloc_traits.h:
 
-C:/msys64/mingw64/include/c++/15.2.0/bits/charconv.h:
-
-C:/msys64/mingw64/include/SFML/System/InputStream.hpp:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_base.h:
-
 C:/msys64/mingw64/include/c++/15.2.0/bits/cpp_type_traits.h:
-
-C:/msys64/mingw64/include/c++/15.2.0/utility:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/alloc_traits.h:
 
@@ -452,6 +449,14 @@ C:/msys64/mingw64/include/c++/15.2.0/bits/requires_hosted.h:
 C:/msys64/mingw64/include/c++/15.2.0/backward/auto_ptr.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/array:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/charconv.h:
+
+C:/msys64/mingw64/include/SFML/System/InputStream.hpp:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_base.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/algorithm:
 
 C:/msys64/mingw64/include/assert.h:
 
@@ -514,8 +519,6 @@ C:/msys64/mingw64/include/c++/15.2.0/bits/quoted_string.h:
 C:/msys64/mingw64/include/SFML/Graphics/CircleShape.hpp:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/fs_path.h:
-
-C:/msys64/mingw64/include/SFML/System/Vector2.hpp:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/basic_ios.tcc:
 
@@ -653,6 +656,10 @@ C:/msys64/mingw64/include/malloc.h:
 
 C:/msys64/mingw64/include/SFML/Graphics/Shader.hpp:
 
+C:/msys64/mingw64/include/SFML/System/Vector2.hpp:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algo.h:
+
 C:/msys64/mingw64/include/SFML/Graphics/Texture.hpp:
 
 C:/msys64/mingw64/include/SFML/System/String.hpp:
@@ -755,7 +762,9 @@ C:/msys64/mingw64/include/c++/15.2.0/type_traits:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/locale_facets.tcc:
 
-C:/msys64/mingw64/include/c++/15.2.0/cwctype:
+C:/msys64/mingw64/include/c++/15.2.0/typeinfo:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/locale_facets_nonio.tcc:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/localefwd.h:
 
@@ -855,6 +864,10 @@ C:/msys64/mingw64/include/c++/15.2.0/bits/stl_vector.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/streambuf.tcc:
 
+C:/msys64/mingw64/include/c++/15.2.0/cwctype:
+
+C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_algorithm_defs.h:
+
 C:/msys64/mingw64/include/c++/15.2.0/bits/streambuf_iterator.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/hashtable_policy.h:
@@ -940,7 +953,3 @@ C:/msys64/mingw64/include/c++/15.2.0/streambuf:
 C:/msys64/mingw64/include/c++/15.2.0/string:
 
 C:/msys64/mingw64/include/c++/15.2.0/tuple:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/locale_facets_nonio.tcc:
-
-C:/msys64/mingw64/include/c++/15.2.0/typeinfo:

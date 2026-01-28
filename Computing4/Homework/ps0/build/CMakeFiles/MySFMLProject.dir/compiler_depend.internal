@@ -89,6 +89,7 @@ CMakeFiles/MySFMLProject.dir/main.cpp.o
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/_mingw_stat64.h
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/_timeval.h
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/assert.h
+ /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/algorithm
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/array
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/backward/auto_ptr.h
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/backward/binders.h
@@ -158,6 +159,7 @@ CMakeFiles/MySFMLProject.dir/main.cpp.o
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/bits/ptr_traits.h
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/bits/quoted_string.h
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/bits/range_access.h
+ /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algo.h
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algobase.h
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_base.h
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_cmp.h
@@ -243,6 +245,7 @@ CMakeFiles/MySFMLProject.dir/main.cpp.o
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/optional
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/ostream
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/pstl/execution_defs.h
+ /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_algorithm_defs.h
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_memory_defs.h
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/pstl/pstl_config.h
  /c/Users/craba/UMASS-LOWELL/Computing4/Homework/HW00/build/C:/msys64/mingw64/include/c++/15.2.0/ratio

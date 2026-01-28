@@ -307,4 +307,7 @@ CMakeFiles/MySFMLProject.dir/main.cpp.o: \
  C:/msys64/mingw64/include/SFML/System/FileInputStream.hpp \
  C:/msys64/mingw64/include/SFML/System/InputStream.hpp \
  C:/msys64/mingw64/include/SFML/System/MemoryInputStream.hpp \
- C:/msys64/mingw64/include/SFML/System/Sleep.hpp
+ C:/msys64/mingw64/include/SFML/System/Sleep.hpp \
+ C:/msys64/mingw64/include/c++/15.2.0/algorithm \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algo.h \
+ C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_algorithm_defs.h
