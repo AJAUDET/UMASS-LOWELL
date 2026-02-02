@@ -1,25 +1,24 @@
-CC = g++
-CFLAGS = --std=c++17 -Wall -Werror -pedantic -g
-LIB = -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lboost_unit_test_framework-mt
-# Your .hpp files
-DEPS =
-# Your compiled .o files
-OBJECTS =
-# The name of your program
-PROGRAM = sfml-app
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Werror -pedantic
+SFML_LIBS = -lsfml-graphics -lsfml-window -lsfml-system
+BOOST_LIBS = -lboost_unit_test_framework
 
-.PHONY: all clean lint
+PROJECT = SpriteBuilder
+TEST = test
+LIB = SpriteBuilder.a
 
-all: $(PROGRAM)
+all: $(PROJECT) $(TEST) $(LIB)
 
-%.o: %.cpp $(DEPS)
-	$(CC) $(CFLAGS) -c $<
+$(LIB): SpriteSheet.o
+	ar rcs $(LIB) SpriteSheet.o 
 
-$(PROGRAM): main.o $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $^ $(LIB)
+$(PROJECT): SpriteBuilder.o $(LIB)
+	$(CXX) $(CXXFLAGS) -o $(PROJECT) $(LIB) SpriteBuilder.o $(SFML_LIBS)
+
+$(TEST): test.o $(LIB)
+	$(CXX) $(CXXFLAGS) -o $(TEST) test.o $(LIB) $(SFML_LIBS) $(BOOST_LIBS)
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm *.o $(PROGRAM)
-
-lint:
-	cpplint *.cpp *.hpp
+	rm -f *.o $(PROJECT) $(LIB) $(TEST)
