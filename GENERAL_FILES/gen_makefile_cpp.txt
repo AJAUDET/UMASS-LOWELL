@@ -1,18 +1,27 @@
-CC = g++
-CFLAGS = -Wall -g
-OBJECTS = main.o file1.o
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Werror -pedantic
+SFML_LIBS = -lsfml-graphics -lsfml-window -lsfml-system
+BOOST_LIBS = -lboost_unit_test_framework
 
-program: $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -o program.exe
+OBJECTS = file.o 
 
-main.o:main.cpp 
-	$(CC) $(CFLAGS) -c main.cpp
+PROJECT = ProgName
+TEST = TestProg
+LIB = Library.a
 
-file1.o:file1.cpp
-	$(CC) $(CFLAGS) -c file1.cpp
+all: $(PROJECT) $(TEST) $(LIB)
 
-test:
-	g++ file1.cpp test.cpp -o test -lboost_unit_test_framework
+$(LIB): $(OBJECTS)
+	ar rcs $(LIB) $(OBJECTS)
+
+$(PROJECT): $(OBJECTS) $(LIB)
+	$(CXX) $(CXXFLAGS) -o $(PROJECT) $(LIB) $(OBJECTS) $(SFML_LIBS)
+
+$(TEST): test.o $(LIB)
+	$(CXX) $(CXXFLAGS) -o $(TEST) test.o $(LIB) $(SFML_LIBS) $(BOOST_LIBS)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJECTS) program.exe test
+	rm -f *.o $(PROJECT) $(LIB) $(TEST)

@@ -1,8 +1,0 @@
-[
-{
-  "directory": "C:/Users/craba/UMASS-LOWELL/build",
-  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/MySFMLProject.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\MySFMLProject.dir\\main.cpp.obj -c C:\\Users\\craba\\UMASS-LOWELL\\Computing4\\Homework\\ps1A\\main.cpp",
-  "file": "C:/Users/craba/UMASS-LOWELL/Computing4/Homework/ps1A/main.cpp",
-  "output": "CMakeFiles/MySFMLProject.dir/main.cpp.obj"
-}
-]
