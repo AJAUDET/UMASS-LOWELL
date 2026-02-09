@@ -50,7 +50,9 @@ TextureView TextureView::crop(const sf::IntRect& rect) const {
 }
 
 sf::Sprite TextureView::toSprite() const {
-    return sf::Sprite(*texture_, rect_);
+    sf::Sprite sprite(*texture_);
+    sprite.setTextureRect(rect_);
+    return sprite;
 }
 
 sf::Image TextureView::toImage() const {

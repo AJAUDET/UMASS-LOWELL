@@ -1,0 +1,8 @@
+16 16 1
+images/base.png
+images/pants.png
+images/shirts.png
+images/hair.png
+images/hats.png
+images/weapon.png
+images/shield.png
