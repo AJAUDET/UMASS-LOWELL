@@ -1,3 +1,0 @@
-C:/Users/craba/UMASS-LOWELL/build/CMakeFiles/MySFMLProject.dir
-C:/Users/craba/UMASS-LOWELL/build/CMakeFiles/edit_cache.dir
-C:/Users/craba/UMASS-LOWELL/build/CMakeFiles/rebuild_cache.dir

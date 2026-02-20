@@ -1,23 +1,35 @@
 // Copyright (c) 2026 AJ Audet
 
-#include <SFML/Graphics.hpp>
 #include <iostream>
+#include <string>
+#include <chrono>
+#include <random>
 
 #include "SpriteSheet.hpp"
 #include "SpriteBuilder.hpp"
 
+#include <SFML/Graphics.hpp>
+
 int main(int argc, char* argv[]) {
-    if (argc < 2) {
-            std::cerr << "Usage: " << argv[0]
-                    << " <datafile> [scale]\n";
+    std::string dataFile;
+    unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
+    unsigned int scale = 16;
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+
+        if (arg.rfind("--file=", 0) == 0) {
+            dataFile = arg.substr(7);
+        } else if (arg.rfind("--scale=", 0) == 0) {
+            scale = static_cast<unsigned int>(std::stoul(arg.substr(8)));
+        } else if (arg.rfind("--seed=", 0) == 0) {
+            seed = static_cast<unsigned int>(std::stoul(arg.substr(7)));
+        } else {
+            std::cerr << "Unknown argument: " << arg << "\n";
             return 1;
         }
+    }
 
-    std::string dataFile = argv[1];
-    unsigned scale = (argc >= 3)
-        ? static_cast<unsigned>(std::stoul(argv[2])): 1;
-
-    sb::SpriteBuilder builder(dataFile);
+    sb::SpriteBuilder builder(dataFile, seed);
 
     sf::Vector2u size = builder.windowSize();
     sf::RenderWindow window(
@@ -37,9 +49,10 @@ int main(int argc, char* argv[]) {
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
                 window.close();
-
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R))
                 builder.randomize();
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+                builder.save("output_" + std::to_string(seed) + ".png");
         }
 
         window.clear(sf::Color::Transparent);

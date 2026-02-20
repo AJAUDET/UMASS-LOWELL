@@ -75,5 +75,6 @@
     "set": "cpp",
     "iostream": "cpp"
   },
-  "cmake.sourceDirectory": "C:/Users/craba/UMASS-LOWELL/Computing4/ps1b"
+  "cmake.sourceDirectory": "C:/Users/craba/UMASS-LOWELL/Computing4/*",
+  "C_Cpp.clang_format_fallbackStyle": "Google"
 }
