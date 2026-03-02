@@ -25,11 +25,21 @@ The private variables that I decided to track were the level width, height. A ma
 ### Memory
 Describe how you decided to store the level data including whether you used smart pointers.
 
+As a base I used a unique pointer to a SpriteSheet object to store the tiles, my SpriteSheet implementation uses smart pointers to store a cropped Texture.
+
 ### Lambdas
 Describe what <algorithm> functions you used and what lambda expressions you wrote.
 
+I did not use any lambda functions.
+
 ### Issues
 What did you have trouble with?  What did you learn?  What doesn't work?  Be honest.  You might be penalized if you claim something works and it doesn't.
+
+I had trouble with not overwriting the tiles the player moved over, for instance if the player moved over a storage tile the tile would be replaced with a floor tile, I have since fixed the issue.
+
+Another issue I has was player movement, the logic behing movement revolves around a check of the tile in front of the player, but when a box comes into play there is a check for the objct ahead of the box as well.
+
+After eveyrhting though my Sokoban levels are complete, I am still having an issue with displaying a winning screen for the player as of 3-1-25 but I will work on it during the grace period
 
 ### Extra Credit
 Anything special you did.  This is required to earn bonus points.
@@ -43,3 +53,4 @@ AJ Audet SpriteBuilder: ps1
 
 Kenney Sokoban Pack (CC0): https://kenney.nl/assets/sokoban
 SFML Documentation: https://www.sfml-dev.org/documentation/3.0.2/annotated.html 
+Hurmit Nerd Font: https://www.nerdfonts.com/font-downloads

@@ -3,7 +3,6 @@
 #include <iostream>
 #include <optional>
 #include <SFML/Graphics.hpp>
-
 #include "Sokoban.hpp"
 
 using SB::Direction;
@@ -48,10 +47,13 @@ int main(int argc, char* argv[]) {
             cout << "Level reset.\n";
           }
 
-          if (key == Key::Up) game.movePlayer(Direction::Up);
-          if (key == Key::Down) game.movePlayer(Direction::Down);
-          if (key == Key::Left) game.movePlayer(Direction::Left);
-          if (key == Key::Right) game.movePlayer(Direction::Right);
+          if (key == Key::Up || key == Key::W) game.movePlayer(Direction::Up);
+          if (key == Key::Down || key == Key::S)
+            game.movePlayer(Direction::Down);
+          if (key == Key::Left || key == Key::A)
+            game.movePlayer(Direction::Left);
+          if (key == Key::Right || key == Key::D)
+            game.movePlayer(Direction::Right);
         }
       }
 

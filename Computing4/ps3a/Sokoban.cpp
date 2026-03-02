@@ -21,16 +21,16 @@ sf::Vector2u Sokoban::windowSize() const {
 
 sf::Vector2u Sokoban::playerLoc() const { return playerPos_; }
 
-void Sokoban::movePlayer(Direction) {
-  // UNDEFINED FOR PART A
+void Sokoban::movePlayer(Direction dir) {
+  // stub for a
 }
 
 bool Sokoban::isWon() const {
-  return false;  // stub for checks
+  return false;  // stub for a
 }
 
 void Sokoban::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-for (unsigned int y = 0; y < lvlHeight_; ++y) {
+  for (unsigned int y = 0; y < lvlHeight_; ++y) {
     for (unsigned int x = 0; x < lvlWidth_; ++x) {
       char tile = grid_[index(x, y)];
 
@@ -84,17 +84,13 @@ std::istream& operator>>(std::istream& in, Sokoban& s) {
   for (unsigned int y = 0; y < s.lvlHeight_; ++y) {
     std::getline(in, level);
     if (level.size() != s.lvlWidth_) {
-      std::runtime_error("Sokoban: Level width does not match");
+      throw std::runtime_error("Sokoban: Level width does not match");
     }
     for (unsigned int x = 0; x < s.lvlWidth_; ++x) {
       char tile = '.';
       if (x < level.size()) tile = level[x];
-      if (tile == '@') {
-        s.playerPos_ = {x, y};
-        s.grid_[s.index(x, y)] = '.';
-      } else {
-        s.grid_[s.index(x, y)] = tile;
-      }
+      if (tile == '@') s.playerPos_ = {x, y};
+      s.grid_[s.index(x, y)] = tile;
     }
   }
   s.origGrid_ = s.grid_;

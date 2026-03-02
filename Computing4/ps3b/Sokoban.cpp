@@ -21,16 +21,78 @@ sf::Vector2u Sokoban::windowSize() const {
 
 sf::Vector2u Sokoban::playerLoc() const { return playerPos_; }
 
-void Sokoban::movePlayer(Direction) {
-  // UNDEFINED FOR PART A
+void Sokoban::reset() {
+  grid_ = origGrid_;
+  playerPos_ = origPos_;
+}
+
+void Sokoban::movePlayer(Direction dir) {
+  if (isWon()) return;
+  int dx = 0;
+  int dy = 0;
+  switch (dir) {
+    case Direction::Up:
+      dy = -1;
+      break;
+    case Direction::Down:
+      dy = 1;
+      break;
+    case Direction::Left:
+      dx = -1;
+      break;
+    case Direction::Right:
+      dx = 1;
+      break;
+  }
+  int x = static_cast<int>(playerPos_.x);
+  int y = static_cast<int>(playerPos_.y);
+
+  int nx = x + dx;
+  int ny = y + dy;
+
+  if (nx < 0 || ny < 0 || nx >= static_cast<int>(lvlWidth_) ||
+      ny >= static_cast<int>(lvlHeight_)) {
+    return;
+  }
+
+  char& target = grid_[index(nx, ny)];
+  if (target == '#') return;
+  if (target == 'A' || target == '1') {
+    int bx = nx + dx;
+    int by = ny + dy;
+
+    if (bx < 0 || by < 0 || bx >= static_cast<int>(lvlWidth_) ||
+        by >= static_cast<int>(lvlHeight_)) {
+      return;
+    }
+
+    char& tile = grid_[index(bx, by)];
+    if (tile == '.' || tile == 'a') {
+      tile = (tile == 'a') ? '1' : 'A';
+      target = (target == '1') ? 'a' : '.';
+    } else {
+      return;
+    }
+  }
+
+  if (grid_[index(x, y)] == '@') {
+    grid_[index(x, y)] = '.';
+  }
+  playerPos_ = {static_cast<unsigned>(nx), static_cast<unsigned>(ny)};
 }
 
 bool Sokoban::isWon() const {
-  return false;  // stub for checks
+  bool offGoal = false;
+  bool empty = false;
+  for (char c : grid_) {
+    if (c == 'A') offGoal = true;
+    if (c == 'a') empty = true;
+  }
+  return (!offGoal) || !(empty);
 }
 
 void Sokoban::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-for (unsigned int y = 0; y < lvlHeight_; ++y) {
+  for (unsigned int y = 0; y < lvlHeight_; ++y) {
     for (unsigned int x = 0; x < lvlWidth_; ++x) {
       char tile = grid_[index(x, y)];
 
@@ -91,6 +153,7 @@ std::istream& operator>>(std::istream& in, Sokoban& s) {
       if (x < level.size()) tile = level[x];
       if (tile == '@') {
         s.playerPos_ = {x, y};
+        s.origPos_ = {x, y};
         s.grid_[s.index(x, y)] = '.';
       } else {
         s.grid_[s.index(x, y)] = tile;

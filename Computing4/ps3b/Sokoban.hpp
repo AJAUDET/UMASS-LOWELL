@@ -31,7 +31,7 @@ class Sokoban : public sf::Drawable {
   void movePlayer(Direction dir);
   bool isWon() const;
 
-  void reset() { grid_ = origGrid_; }
+  void reset();
   friend std::ostream& operator<<(std::ostream& out, const Sokoban& s);
   friend std::istream& operator>>(std::istream& in, Sokoban& s);
 
@@ -46,6 +46,7 @@ class Sokoban : public sf::Drawable {
   std::vector<char> origGrid_;
 
   sf::Vector2u playerPos_{0, 0};
+  sf::Vector2u origPos_{0, 0};
   sf::Texture tiles_;
   std::unique_ptr<sb::SpriteSheet> spriteSheet_;
 
