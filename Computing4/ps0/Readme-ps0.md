@@ -6,6 +6,7 @@ Time to Complete: 5 Hours
 ## Description
 This project was designed to setup the SFML library on my laptop, run the SFML Hello World driver code, and 
 implement my own code with my own custom sprite and movement responses
+
 ### Features
 The features for my sprite are as follows
 1. The sprite is responsive to the arrow keys for movement

@@ -17,7 +17,7 @@ all: $(PROGRAM)
 	$(CC) $(CFLAGS) -c $<
 
 $(PROGRAM): main.o $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $^ $(LIB) $(BOOSTLIB)
+	$(CC) $(CFLAGS) -o $@ $^ $(LIB)
 
 clean:
 	rm *.o $(PROGRAM)

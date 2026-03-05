@@ -47,7 +47,8 @@ int main(int argc, char* argv[]) {
             cout << "Level reset.\n";
           }
 
-          if (key == Key::Up || key == Key::W) game.movePlayer(Direction::Up);
+          if (key == Key::Up || key == Key::W) 
+            game.movePlayer(Direction::Up);
           if (key == Key::Down || key == Key::S)
             game.movePlayer(Direction::Down);
           if (key == Key::Left || key == Key::A)
