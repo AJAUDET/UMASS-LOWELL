@@ -7,6 +7,18 @@ namespace AP {
 
 sf::Color parseColor(const std::string& hex) {
     std::string cleanHex = hex;
+    std::string temp = hex;
+    transform(temp.begin(), temp.end(), temp.begin(), ::tolower);
+
+    if (temp == "black") return sf::Color::Black;
+    if (temp == "white") return sf::Color::White;
+    if (temp == "red") return sf::Color::Red;
+    if (temp == "green") return sf::Color::Green;
+    if (temp == "blue") return sf::Color::Blue;
+    if (temp == "yellow") return sf::Color::Yellow;
+    if (temp == "magenta") return sf::Color::Magenta;
+    if (temp == "cyan") return sf::Color::Cyan;
+    if (temp == "transparent") return sf::Color::Transparent;
 
     if (!cleanHex.empty() && cleanHex[0] == '#') {
         cleanHex = cleanHex.substr(1);
@@ -56,11 +68,11 @@ void Component::tween(sf::Time time) {
 std::unique_ptr<Component> Component::fromJson(const Json& data) {
     std::string shape = data.value("shape", "null");
 
-    if (shape == "circle")      return std::make_unique<CircleComponent>(data);
-    if (shape == "composite")   return std::make_unique<CompositeComponent>(data);
-    if (shape == "rect")        return std::make_unique<RectangleComponent>(data);
-    if (shape == "image")       return std::make_unique<ImageComponent>(data);
-    if (shape == "text")        return std::make_unique<TextComponent>(data);
+    if (shape == "circle") return std::make_unique<CircleComponent>(data);
+    if (shape == "composite") return std::make_unique<CompositeComponent>(data);
+    if (shape == "rect") return std::make_unique<RectangleComponent>(data);
+    if (shape == "image") return std::make_unique<ImageComponent>(data);
+    if (shape == "text") return std::make_unique<TextComponent>(data);
 
     throw std::runtime_error("Component::fromJson, Unknown component: " + shape);
 }

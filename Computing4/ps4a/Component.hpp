@@ -166,7 +166,6 @@ class CompositeComponent: public Component {
  public:
     std::vector<std::unique_ptr<Component>> components_;
     explicit CompositeComponent(const Json& data): Component(data) {
-        // assume components since no clue what the keyword to store components is
         if (data.contains("children")) {
             for (const auto& c : data["children"]) {
                 components_.push_back(Component::fromJson(c));
