@@ -20,7 +20,8 @@
                 "shape": "rect",
                 "width": 90,
                 "height": 200,
-                "color": "F0FF0AA",
+                "color": "blue",
+                "bgm": "morning-mood.ogg",
                 "keyframes": [
                     {"t": 0, "x": 100, "y": 100, "theta": 45},
                     {"t": 0, "x": 100, "y": 100}

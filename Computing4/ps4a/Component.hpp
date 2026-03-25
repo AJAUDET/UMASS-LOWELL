@@ -72,7 +72,6 @@ class NullComponent: public Component {
 
 class CircleComponent: public Component {
  public:
-    sf::CircleShape circle_;
     explicit CircleComponent(const Json& data): Component(data),
     circle_(data.value("radius", 0.0f)) {
         circle_.setFillColor(color());
@@ -86,14 +85,15 @@ class CircleComponent: public Component {
       states.transform.translate({-circle_.getRadius(), -circle_.getRadius()});
       target.draw(circle_, states);
     }
+ private:
+    sf::CircleShape circle_;
 };
 
 class RectangleComponent: public Component {
  public:
-    sf::RectangleShape rect_;
     explicit RectangleComponent(const Json& data): Component(data),
     rect_({data.value("width", 0.0f), data.value("height", 0.0f)}) {
-       rect_.setFillColor(color());
+    rect_.setFillColor(color());
     rect_.setPosition({data.value("x", 0.0f), data.value("y", 0.0f)});
     }
  protected:
@@ -103,12 +103,12 @@ class RectangleComponent: public Component {
       states.transform *= transform_;
       target.draw(rect_, states);
     }
+ private:
+    sf::RectangleShape rect_;
 };
 
 class ImageComponent: public Component {
  public:
-    std::optional<sf::Sprite> sprite_;
-    sf::Texture texture_;
     explicit ImageComponent(const Json& data): Component(data), sprite_() {
         std::string filename = data.value("file", "");
         if (!texture_.loadFromFile(filename))
@@ -134,12 +134,14 @@ class ImageComponent: public Component {
       });
       target.draw(*sprite_, states);
     }
+
+ private:
+    std::optional<sf::Sprite> sprite_;
+    sf::Texture texture_;
 };
 
 class TextComponent: public Component {
  public:
-  sf::Font font_;
-  sf::Text text_;
   explicit TextComponent(const Json& data) : Component(data), font_(), text_(font_) {
     std::string fontFile = data["font"];
     if (!font_.openFromFile(fontFile)) {
@@ -160,11 +162,14 @@ class TextComponent: public Component {
       states.transform *= transform_;
       target.draw(text_, states);
     }
+
+ private:
+    sf::Font font_;
+    sf::Text text_;
 };
 
 class CompositeComponent: public Component {
  public:
-    std::vector<std::unique_ptr<Component>> components_;
     explicit CompositeComponent(const Json& data): Component(data) {
         if (data.contains("children")) {
             for (const auto& c : data["children"]) {
@@ -182,6 +187,8 @@ class CompositeComponent: public Component {
         target.draw(*component, states);
       }
     }
+ private:
+    std::vector<std::unique_ptr<Component>> components_;
 };
 
 }  // namespace AP

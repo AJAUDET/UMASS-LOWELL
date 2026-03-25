@@ -13,6 +13,8 @@ Time to Complete: 8 Hours
 Displays a static image based off of given data in a json file. There are plans to make it a non static animation player in part B of the assignment.
 
 ### Features
+
+#### Part a
 Describe what your major decisions were and why you did things that way.
 
 AniPlayer: Based off of the given information from a json file, creates shapes, or images to display onto a SFML Window.
@@ -22,14 +24,11 @@ KeyFrame: Moves a given object by an ammount specified in the "keyframes" sectio
 The major design decision was using a static factory function Component::fromJson() to construct the appropriate subclass based on the "shape" field in the JSON. This keeps construction logic in one place so that AniPlayer and CompositeComponent do not need
 to know which concrete type they are creating.
 
-Color parsing supports both hex strings (6-digit RGB and 8-digit RGBA, with or without
-a leading `#`) and named colors.
+Color parsing supports both hex strings (6-digit RGB and 8-digit RGBA, with or without a leading #) and named colors.
 
 CircleComponent and ImageComponent are drawn centered at their KeyFrame position. RectangleComponent uses its own "x" and "y" fields as a local offset applied via setPosition, drawing from the top-left. TextComponent draws from the top-left corner.
 
 Child components in a CompositeComponent are drawn relative to their parent by accumulating transforms through sf::RenderStates. The parent's keyframe transform is applied to states first, then each child's own transform is applied on top, so children are positioned in the parent's local coordinate space.
-
-#### Part a
 
 #### Part b
 
@@ -52,7 +51,6 @@ Named colors: parseColor supports SFML basic colors
 
 ## Pair Programming
 Working with a partner helped divide the work as one person focused on the components hierarchy and constructors while the other handled JSON parsing and the keyframe transform logic rendering. We gave code review between each others to solve on bugs.
-
 
 ## Acknowledgements
 List all sources of help including the instructor or TAs, classmates, and web pages.
