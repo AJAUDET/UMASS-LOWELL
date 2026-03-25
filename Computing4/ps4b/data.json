@@ -1,0 +1,33 @@
+{
+    "width": 800,
+    "height": 600,
+    "scene": {
+        "shape": "composite",
+        "keyframes": [
+            {"t": 0, "x": 0, "y":0}
+        ],
+        "children": [
+            {
+                "shape": "circle",
+                "radius": 30,
+                "color": "F0FFAFAA",
+                "keyframes": [
+                    {"t": 0, "x": 0, "y": 0},
+                    {"t": 0, "x": 150, "y": 500}
+                ]
+            },
+            {
+                "shape": "rect",
+                "width": 90,
+                "height": 200,
+                "color": "blue",
+                "bgm": "morning-mood.ogg",
+                "keyframes": [
+                    {"t": 0, "x": 100, "y": 100, "theta": 45},
+                    {"t": 0, "x": 100, "y": 100}
+                ]
+            }
+
+        ]
+    }
+}
