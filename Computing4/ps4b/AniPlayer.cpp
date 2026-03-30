@@ -19,7 +19,9 @@ namespace AP {
     }
 
     void AniPlayer::tween(sf::Time time) {
-        // Part B
+        if (scene_) {
+          scene_->tween(time);
+        }
     }
 
     sf::Vector2u AniPlayer::windowSize() const {

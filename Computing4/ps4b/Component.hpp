@@ -58,6 +58,7 @@ class Component: public sf::Drawable {
  private:
     std::vector<KeyFrame> keyFrames_;
     sf::Color color_;
+    sf::Time currentTime_;
     KeyFrame currentFrame_;
     sf::Music music_;
 };  // class Component
@@ -176,6 +177,13 @@ class CompositeComponent: public Component {
                 components_.push_back(Component::fromJson(c));
             }
         }
+    }
+
+    void tween(sf::Time time) override {
+      Component::tween(time);
+      for (const auto& component : components_) {
+         component->tween(time);
+      }
     }
 
  protected:

@@ -56,14 +56,21 @@ Component::Component(const Json& data) {
 }
 
 KeyFrame Component::currFrame() const {
-    if (keyFrames_.empty()) {
-      return KeyFrame();
-    }
-    return keyFrames_[0];  // default to first frame for part A
+  if (keyFrames_.empty()) return KeyFrame();
+  if (currentTime_ <= keyFrames_[0].time()) return keyFrames_[0];
+  if (currentTime_ >= keyFrames_.back().time()) return keyFrames_.back();
+
+  for (size_t i = 0; i < keyFrames_.size(); ++i) {
+    if (currentTime_ >= keyFrames_[i].time() &&
+        currentTime_ <= keyFrames_[i + 1].time()) {
+      return keyFrames_[i].tween(keyFrames_[i + 1], currentTime_);
+        }
+  }
+  return keyFrames_.back();
 }
 
 void Component::tween(sf::Time time) {
-    // For part B
+    currentTime_ = time;
 }
 std::unique_ptr<Component> Component::fromJson(const Json& data) {
     std::string shape = data.value("shape", "null");
