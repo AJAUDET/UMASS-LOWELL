@@ -33,13 +33,13 @@ KeyFrame KeyFrame::tween(KeyFrame alt, sf::Time t) const {
   float frameElapsed = (t - time()).asSeconds();
   float timeDifference = frameElapsed / frameDuration;
   timeDifference = std::max(0.0f, std::min(1.0f, timeDifference));
-  
+
   KeyFrame newFrame;
   newFrame.time_ = t;
   newFrame.x_ = x_ + (alt.x_ - x_) * timeDifference;
   newFrame.y_ = y_ + (alt.y_ - y_) * timeDifference;
   newFrame.xScale_ = xScale_ + (alt.xScale_ - xScale_) * timeDifference;
-  newFrame.yScale_= yScale_ + (alt.yScale_ - yScale_) * timeDifference;
+  newFrame.yScale_ = yScale_ + (alt.yScale_ - yScale_) * timeDifference;
   newFrame.theta_ = theta_ + (alt.theta_ - theta_) * timeDifference;
 
   return newFrame;

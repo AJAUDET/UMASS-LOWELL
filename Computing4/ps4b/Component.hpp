@@ -195,6 +195,7 @@ class CompositeComponent: public Component {
         target.draw(*component, states);
       }
     }
+
  private:
     std::vector<std::unique_ptr<Component>> components_;
 };
