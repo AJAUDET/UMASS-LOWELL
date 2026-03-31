@@ -16,6 +16,11 @@ namespace AP {
         width_ = data.value("width", 0);
         height_ = data.value("height", 0);
         scene_ = Component::fromJson(data["scene"]);
+
+        std::string bgm = data.value("bgm", "");
+        if (!bgm.empty() && music_.openFromFile(bgm)) {
+            music_.play();
+        }
     }
 
     void AniPlayer::tween(sf::Time time) {
@@ -30,5 +35,18 @@ namespace AP {
 
     void AniPlayer::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         target.draw(*scene_, states);
+    }
+
+    void AniPlayer::pause() {
+    music_.pause();
+    }
+
+    void AniPlayer::unpause() {
+        music_.play();
+    }
+
+    void AniPlayer::restart() {
+        music_.stop();
+        music_.play();
     }
 }

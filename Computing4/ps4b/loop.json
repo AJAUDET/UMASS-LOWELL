@@ -1,0 +1,21 @@
+{
+    "width": 800,
+    "height": 600,
+    "scene": {
+        "shape": "composite",
+        "keyframes": [{"t": 0.0}, {"t": 4.0}],
+        "children": [
+            {
+                "shape": "circle",
+                "radius": 20,
+                "color": "FF0000FF",
+                "loop": true,
+                "keyframes": [
+                    {"t": 0.0, "x": 100, "y": 100},
+                    {"t": 2.0, "x": 300, "y": 100},
+                    {"t": 4.0, "x": 100, "y": 100}
+                ]
+            }
+        ]
+    }
+}

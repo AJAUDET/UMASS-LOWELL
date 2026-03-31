@@ -44,15 +44,25 @@ sf::Color parseColor(const std::string& hex) {
 Component::Component(const Json& data) {
   std::string compColor = data.value("color", "FFFFFFFF");
   color_ = parseColor(compColor);
+  loop_ = data.contains("loop") &&
+  !data["loop"].is_null() && data["loop"].get<bool>();
 
   if (data.contains("keyframes")) {
     for (const auto& k : data["keyframes"]) {
-      keyFrames_.push_back(KeyFrame(k));
+      Json patched = k;
+      if (!keyFrames_.empty()) {
+        const KeyFrame& prev = keyFrames_.back();
+        if (!patched.contains("x")) patched["x"] = prev.getX();
+        if (!patched.contains("y")) patched["y"] = prev.getY();
+        if (!patched.contains("scale-x")) patched["scale-x"] = prev.getXScale();
+        if (!patched.contains("scale-y")) patched["scale-y"] = prev.getYScale();
+        if (!patched.contains("theta")) patched["theta"] = prev.theta();
+      }
+      keyFrames_.push_back(KeyFrame(patched));
     }
   }
 
   if (keyFrames_.empty()) keyFrames_.push_back(KeyFrame());
-  playbgm(data);
 }
 
 KeyFrame Component::currFrame() const {
@@ -60,7 +70,7 @@ KeyFrame Component::currFrame() const {
   if (currentTime_ <= keyFrames_[0].time()) return keyFrames_[0];
   if (currentTime_ >= keyFrames_.back().time()) return keyFrames_.back();
 
-  for (size_t i = 0; i < keyFrames_.size(); ++i) {
+  for (size_t i = 0; i + 1 < keyFrames_.size(); ++i) {
     if (currentTime_ >= keyFrames_[i].time() &&
         currentTime_ <= keyFrames_[i + 1].time()) {
       return keyFrames_[i].tween(keyFrames_[i + 1], currentTime_);
@@ -70,6 +80,17 @@ KeyFrame Component::currFrame() const {
 }
 
 void Component::tween(sf::Time time) {
+    if (loop_ && !keyFrames_.empty()) {
+        float start = keyFrames_.front().time().asSeconds();
+        float end = keyFrames_.back().time().asSeconds();
+        float duration = end - start;
+        if (duration > 0.0f) {
+            float t = time.asSeconds();
+            t = start + std::fmod(t - start, duration);
+            currentTime_ = sf::seconds(t);
+            return;
+        }
+    }
     currentTime_ = time;
 }
 std::unique_ptr<Component> Component::fromJson(const Json& data) {
@@ -82,15 +103,6 @@ std::unique_ptr<Component> Component::fromJson(const Json& data) {
     if (shape == "text") return std::make_unique<TextComponent>(data);
 
     throw std::runtime_error("Component::fromJson, Unknown component: " + shape);
-}
-
-void Component::playbgm(const Json& data) {
-    std::string bgm = data.value("bgm", "");
-    if (bgm.empty()) return;
-    if (!music_.openFromFile(bgm)) {
-        return;
-    }
-    music_.play();
 }
 
 }  // namespace AP

@@ -26,14 +26,16 @@ int main(int argc, char* argv[]) {
                     clock.restart();
                     pauseOffset = sf::Time::Zero;
                     paused = false;
+                    player.restart();
                 } else if (key->code == sf::Keyboard::Key::P ||
                            key->code == sf::Keyboard::Key::Space) {
                     if (paused) {
-                        clock.restart();
                         paused = false;
+                        player.unpause();
                     } else {
                         pauseOffset += clock.getElapsedTime();
                         paused = true;
+                        player.pause();
                     }
                 }
             }

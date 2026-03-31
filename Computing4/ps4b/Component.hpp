@@ -53,14 +53,13 @@ class Component: public sf::Drawable {
      * @return The color
      */
     sf::Color color() const { return color_; }
-    void playbgm(const Json& data);
 
  private:
     std::vector<KeyFrame> keyFrames_;
     sf::Color color_;
     sf::Time currentTime_;
     KeyFrame currentFrame_;
-    sf::Music music_;
+    bool loop_;
 };  // class Component
 
 class NullComponent: public Component {

@@ -28,6 +28,9 @@ class AniPlayer: public sf::Drawable {
      * @return The size (in pixels)
      */
     sf::Vector2u windowSize() const;
+    void pause();
+    void unpause();
+    void restart();
 
  protected:
     void draw(sf::RenderTarget& target,
@@ -37,5 +40,6 @@ class AniPlayer: public sf::Drawable {
     std::unique_ptr<Component> scene_;
     unsigned int width_;
     unsigned int height_;
+    sf::Music music_;
 };  // Class AniPlayer
 }  // namespace AP
