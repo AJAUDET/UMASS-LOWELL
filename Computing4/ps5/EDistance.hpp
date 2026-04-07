@@ -40,7 +40,14 @@ class EDistance {
     * Formats the desired string in the optimal allignment given by opt_
     * @return alligned DNA string
     */
+    std::string alignmentDP();
     std::string alignment();
+    void hirschberg(const std::string& a, int aStart, int aEnd, const std::string& b, int bStart,
+                int bEnd, std::stringstream& out);
+    std::vector<int> computeForward(const std::string& a, int aStart, int aEnd, const std::string& b,
+                                int bStart, int bEnd);
+    std::vector<int> computeBackward(const std::string& a, int aStart, int aEnd, const std::string& b,
+                                 int bStart, int bEnd);
 
  private:
     std::string DNAStrand1_;
