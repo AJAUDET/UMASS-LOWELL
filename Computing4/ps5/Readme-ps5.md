@@ -25,6 +25,8 @@ Implements Hirschberg’s algorithm via the alignment() function. Reduces space 
 
 The hirschberg() function splits one string in half, then it finds the optimal split point in the other string, and recursively solves subproblems, and it will fallback on alignmentDP() for smaller datasets.
 
+To store the optimal distance values we stored them in a vector<vector<int>>, this way we were able to create a 2D table of values for our string allignments along side their costs.
+
 ### Testing
 Describe what the unit tests you wrote check for and why you picked them.
 
@@ -44,6 +46,8 @@ TestAlignmentDirection: Checks the program produces a valid alignment and non-ne
 What did you have trouble with?  What did you learn?  What doesn't work?  Be honest.  You might be penalized if you claim something works and it doesn't.
 
 The first iteration of the code for EDistance.cpp and Edistance.hpp can only handle files hat are smaller than ecoli28284.txt, it is unable to run that file and any files above it. Otherwise the program has full functionaliy and has no memory leaks appearing, we used valgrind to verify this. When we implemented the extra credit we are able to get around this limitation.
+
+optDistance(): stores the opt_ variable in the struct, the Autograder asks for this value, in the Hirschberg version of the code it does not store any variables, so it fails the Allignment Tests. Currently we have re implemented an old version of our main.cpp to get around this issue, we do not have a solution at this time.
 
 ## Analysis
 
@@ -86,6 +90,17 @@ Being able to test across multiple devices and then compare that data to see how
 Using the command: valgrind --tool=massif ./EDistance < sequence/ecoli{number}.txt
 Vizualizing data using command: ms_print massif.out.{pid}
 
+Dynamic Programming
+
+| data file     | distance | memory (MiB) | time (seconds) | partner time |
+|---------------|----------|--------------|----------------|--------------|
+|ecoli2500.txt  |118       |24.08         |0.39942         |0.35130       |
+|ecoli5000.txt  |160       |95.77         |1.64213         |1.34218       |
+|ecoli10000.txt |223       |382.2         |6.70742         |6.24532       |
+|ecoli20000.txt |3135      |1491          |26.2311         |26.0126       |
+
+Hirschberg's Algorithm
+
 | data file     | distance | memory (MiB) | time (seconds) | partner time |
 |---------------|----------|--------------|----------------|--------------|
 |ecoli2500.txt  |118       |0.1516        |0.015969        |0.015937      |
@@ -127,6 +142,8 @@ Hirschberg’s algorithm reduces memory usage by storing only two rows of the dy
 
 ### Valgrind
 Run valgrind and list any errors you see.  Identify whether the memory usage reported by valgrind almost matches the calculations in the previous section.
+
+Hischberg's Algorithm
 
 | data file     | Calculated (MiB) | Measured (MiB) | Difference (%) |
 |---------------|------------------|----------------|----------------|

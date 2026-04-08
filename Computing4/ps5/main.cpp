@@ -40,22 +40,26 @@ int main() {
   try {
     EDistance ed(s1, s2);
 
-    std::string alignment = ed.alignment();
-    // int distance = ed.optDistance(); // Use dynamic programing instead of
-    // Hischberg
+    std::string alignment = ed.alignmentDP();
+    int distance = ed.optDistance();
 
-    int distance = 0;
-    std::istringstream ss(alignment);
-    std::string line;
 
-    while (std::getline(ss, line)) {
-      std::stringstream ls(line);
-      char a, b;
-      int cost;
+//  Uncomment the below statement to implement Hirschberg's algorithm.
+//  Comment out line 44
+    // std::string alignment = ed.alignment();
+    // int distance = 0;
+    // std::istringstream ss(alignment);
+    // std::string line;
 
-      ls >> a >> b >> cost;
-      distance += cost;
-    }
+    // while (std::getline(ss, line)) {
+    //   std::stringstream ls(line);
+    //   char a, b;
+    //   int cost;
+
+    //   ls >> a >> b >> cost;
+    //   distance += cost;
+    // }
+
     sf::Time elapsed_time = clock.getElapsedTime();
 
     std::cout << alignment;
