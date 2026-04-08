@@ -81,7 +81,7 @@ Processors: AMD Ryzen 7 5700U @ 3.20 GHz x16
 ### Runs
 Fill in the table with the results of running your code on both your and your partner's computers.
 
-Being able to test across multiple devices and then compare that data to see how hardware interacts with this projet and how larger datasets can fail completely due to memory allocation errors. 
+Being able to test across multiple devices and then compare that data to see how hardware interacts with this projet and how larger datasets can fail completely due to memory allocation errors. We used the Hirschberg algorithm for running our program.
 
 Using the command: valgrind --tool=massif ./EDistance < sequence/ecoli{number}.txt
 Vizualizing data using command: ms_print massif.out.{pid}
@@ -132,6 +132,7 @@ Run valgrind and list any errors you see.  Identify whether the memory usage rep
 |---------------|------------------|----------------|----------------|
 |ecoli2500.txt  |0.827             |0.1516          |138.034         |
 |ecoli5000.txt  |1.656             |0.2270          |151.779         |
+|ecoli7000.txt  |2.517             |0.309           |156.263         |
 |ecoli10000.txt |3.396             |0.3779          |159.946         |
 |ecoli20000.txt |7.038             |0.6797          |164.772         |
 |ecoli28284.txt |10.826            |0.993           |166.393         |
@@ -154,7 +155,11 @@ Hirschberg’s algorithm reduces the memory required for sequence alignment by n
 |---------------|----------|--------------|----------------|--------------|
 |ecoli28284.txt |8394      |0.993         |2.0252          |1.69952       |
 
+Our customMin() function works by checking if a is less than or equal to b and c, if it is return a, if not it runs a check against b to see if it is less than or equal to a and c, if it is return b, otherwise it will return c.
+
 ## Acknowledgements
 List all sources of help including the instructor or TAs, classmates, and web pages.
 
 - Hirschberg’s Algorithm: A Space‑Efficient Approach to the Longest Common Subsequence by Eugen Sławomir Oparin https://every-algorithm.github.io/2025/07/04/hirschbergs_algorithm.html
+- Valgrind Documentation: https://valgrind.org/docs/
+- Massif Documentation: https://valgrind.org/docs/manual/ms-manual.html
