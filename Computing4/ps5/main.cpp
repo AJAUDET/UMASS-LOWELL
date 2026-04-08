@@ -41,14 +41,21 @@ int main() {
     EDistance ed(s1, s2);
 
     std::string alignment = ed.alignment();
+    // int distance = ed.optDistance(); // Use dynamic programing instead of
+    // Hischberg
 
     int distance = 0;
     std::istringstream ss(alignment);
     std::string line;
-    while (std::getline(ss, line)) {
-        distance += std::stoi(line.substr(line.rfind(' ') + 1));
-    }
 
+    while (std::getline(ss, line)) {
+      std::stringstream ls(line);
+      char a, b;
+      int cost;
+
+      ls >> a >> b >> cost;
+      distance += cost;
+    }
     sf::Time elapsed_time = clock.getElapsedTime();
 
     std::cout << alignment;
