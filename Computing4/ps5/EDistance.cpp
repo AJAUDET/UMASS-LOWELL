@@ -28,7 +28,7 @@ int EDistance::optDistance() {
       int gapInStrand2 = opt_[i + 1][j] + 2;
       int gapInStrand1 = opt_[i][j + 1] + 2;
 
-      opt_[i][j] = customMin(cost, gapInStrand2, gapInStrand1);
+      opt_[i][j] = min3(cost, gapInStrand2, gapInStrand1);
     }
   }
   return opt_[0][0];
@@ -80,7 +80,7 @@ std::vector<int> EDistance::computeForward(const std::string& a, int aStart,
       int match = prev[j - 1] + penalty(a[i], b[bStart + j - 1]);
       int del = prev[j] + 2;
       int ins = curr[j - 1] + 2;
-      curr[j] = customMin(match, del, ins);
+      curr[j] = min3(match, del, ins);
     }
     std::swap(prev, curr);
   }
@@ -102,7 +102,7 @@ std::vector<int> EDistance::computeBackward(const std::string& a, int aStart,
       int match = prev[j + 1] + penalty(a[i], b[bStart + j]);
       int del = prev[j] + 2;
       int ins = curr[j + 1] + 2;
-      curr[j] = customMin(match, del, ins);
+      curr[j] = min3(match, del, ins);
     }
     std::swap(prev, curr);
   }
@@ -126,7 +126,7 @@ void EDistance::hirschberg(const std::string& a, int aStart, int aEnd,
     return;
   }
 
-  if (m <= 10 || n <= 10) {
+  if (m <= 10000 || n <= 10000) {
     std::string aSub = a.substr(aStart, m);
     std::string bSub = b.substr(bStart, n);
     EDistance small(aSub, bSub);

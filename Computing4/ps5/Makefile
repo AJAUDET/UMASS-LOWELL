@@ -18,7 +18,7 @@ $(TARGET): $(MAIN_OBJ) $(LIBRARY)
 	$(CXX) $(CXXFLAGS) $(MAIN_OBJ) $(LIBRARY) -o $(TARGET) $(SFML_LIBS)
 
 $(TEST_TARGET): $(TEST_OBJ) $(LIBRARY)
-	$(CXX) $(CXXFLAGS) $(TEST_OBJ) $(LIBRARY) -o $(TEST_TARGET) $(SFML_LIBS) -lboost_unit_test_framework-mt
+	$(CXX) $(CXXFLAGS) $(TEST_OBJ) $(LIBRARY) -o $(TEST_TARGET) $(SFML_LIBS) -lboost_unit_test_framework
 
 $(LIBRARY): $(LIB_OBJS)
 	ar rcs $@ $^
