@@ -10,9 +10,9 @@ OBJ := $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(SRC))
 
 LIB_OBJ := $(filter-out $(BUILD_DIR)/main.o $(BUILD_DIR)/test.o, $(OBJ))
 
-PROGRAM := Sokoban
-TEST := Test
-LIBRARY := Sokoban.a
+PROGRAM := TextWriter
+TEST := test
+LIBRARY := RandWriter.a
 
 .PHONY: all clean
 
@@ -27,8 +27,8 @@ $(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
 $(LIBRARY): $(LIB_OBJ)
 	ar rcs $@ $^
 
-$(PROGRAM): $(LIBRARY) $(BUILD_DIR)/main.o
-	$(CC) $(CFLAGS) -o $@ $(BUILD_DIR)/main.o $(LIBRARY) $(SFML_LIB)
+$(PROGRAM): $(LIBRARY) $(BUILD_DIR)/TextWriter.o
+	$(CC) $(CFLAGS) -o $@ $(BUILD_DIR)/TextWriter.o $(LIBRARY) $(SFML_LIB)
 
 $(TEST): $(LIBRARY) $(BUILD_DIR)/test.o
 	$(CC) $(CFLAGS) -o $@ $(BUILD_DIR)/test.o $(LIBRARY) $(SFML_LIB) $(TEST_LIB)
