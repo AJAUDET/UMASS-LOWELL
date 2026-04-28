@@ -42,7 +42,7 @@ int main() {
 
     int distance = ed.optDistance();
 
-    std::string alignment = ed.alignmentDP();
+    std::string alignment = ed.alignment();
 
     sf::Time elapsed_time = clock.getElapsedTime();
 
@@ -52,6 +52,8 @@ int main() {
 
     std::cout << "Execution time is " << elapsed_time.asSeconds() << " seconds"
               << std::endl;
+
+    std::cout << "Edit distance =" << distance << std::endl;
 
     return 0;
   } catch (const std::exception& e) {

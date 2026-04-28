@@ -6,6 +6,16 @@ Section: 204
 Time to Complete: 7 Hours
 
 
+## Changes
+
+I was able to submit an on time assignment, I was unable to fix the errors in the log3 section
+
+I refactored the code in order to handle correct event handling that I neglected to do in my original submission, where I opted for a bruteforce method that got the job done but in a quick and dirty way that completely ignored how to properly do this project.
+
+There is now the usage of @dataclass to create my own classes for the different type of events the logs cover, custom classes: BootStart, BootEnd, ServiceStart, SercviceEnd, ServiceRecord, BootRecord. Usage of the @properties inside of BootRecord to check status on self i.e. FAILURE/SUCCESS, and the duration in ms.
+
+Usage of helper functions remains the same with parse/extract_timestamp. Removed extract_boot_and_service_entries, replaced with event_stream and convert_event where we handle which events 
+
 ## Description
 Explain what the project does.
 
@@ -14,7 +24,7 @@ The project is supposed to parse through Kronos Log Files that were given to us,
 ### Features
 Describe what your major decisions were and why you did things that way.
 
-I am coding this project in Python as it is the language that I am most fmailiar with.
+I am coding this project in Python as it is the language that I am most familiar with.
 
 The way I designed the script was to "break" my entries into pairs and then link them together using a set to actually ensure that incomplete entries would be marked as incomplete due to them failing to have a partner message for success as services fail if they start again in the next line.
 
